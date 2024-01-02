@@ -6,7 +6,8 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@views/*": ["src/views/*"]
-    }
+    },
+    "typeRoots": ["src/types"]
   },
   "include": ["App.tsx","index.js","./src/**/*"]
 }

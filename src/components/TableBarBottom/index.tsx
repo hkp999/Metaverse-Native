@@ -18,7 +18,8 @@ export default function TableBarBottom() {
           }
         },
         tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray'
+        tabBarInactiveTintColor: 'gray',
+        headerShown: false,
       })}
     >
       <Tab.Screen name='首页' component={Home}></Tab.Screen>
