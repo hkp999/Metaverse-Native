@@ -3,6 +3,7 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "baseUrl": ".",
+    "module": "CommonJS",
     "paths": {
       "@components/*": ["src/components/*"],
       "@views/*": ["src/views/*"]
