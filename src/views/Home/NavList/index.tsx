@@ -5,7 +5,7 @@ import Recommend from './Recommend'
 import Concern from './Concern'
 import News from './News'
 import SpecialTopic from './SpecialTopic'
-import Tag from './Tag'
+const Tag = lazy(() => import('./Tag'))
 
 const styles = StyleSheet.create({
   navStyle: {

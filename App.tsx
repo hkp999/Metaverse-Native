@@ -4,10 +4,11 @@ import TableBarBottom from '@components/TableBarBottom';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {View} from 'react-native'
 
+import './src/styles/global';
+
 function EmptyScreen() {
   return <View />;
 }
-
 const Stack = createNativeStackNavigator()
 export default function App() {
   return (
