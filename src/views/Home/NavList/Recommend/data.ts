@@ -1,0 +1,50 @@
+export const recommendData = [
+  {
+    id: 6985,
+    author: 'hkp999',
+    gender: 1,
+    avatar: 'https://avatars.githubusercontent.com/u/107165304?v=4',
+    releaseTime: '12小时前',
+    pageView: 6298,
+    isAttent: false,
+    content: '最近的元宇宙概念热度非常的高，目前，社会各界对于“元宇宙”有着不同的认识，但基本共识是，“元宇宙”将成为继移动互联网之后的又一种全新的互联网形态。Web3.0第三代互联网。简单来说，元宇宙虚实融合，将数字世界和物理世界完美融合，将建设一个人类未来工作、学习、娱乐、社交的新空间，是未来生活方式的主要载体，更是每个人都会参与的数字新世界。在移动互联网用户红利已经见顶的今天，“元宇宙”概念的出现让人们看到了“下一代互联网”的曙光，其可能是新时代的流量环境，也可能是未来的交互形式。',
+    linkImg: 'https://q4.itc.cn/q_70/images03/20240105/fa3d4c6dd0ca420a9f24b6aa87da7f6f.jpeg',
+    linkTitle: '套现超4亿！扎克伯格接连两个月抛售Meta股票【附元宇宙行业趋势分析】',
+    linkContent: '根据文件显示，从11月1日到年底，扎克伯格每个交易日都在抛售股票，以约4.28亿美元的价格抛售了近128万股股票，平均每次套现1,040万美元，其中12月28日的最高套现额为1,710万美元。',
+    category: '元宇宙',
+    likes: 953,
+    comments: 36
+  },
+  {
+    id: 15358,
+    author: 'gaearon',
+    gender: 2,
+    avatar: 'https://avatars.githubusercontent.com/u/810438?s=80&v=4',
+    releaseTime: '2天前',
+    pageView: 53687,
+    isAttent: true,
+    content: '在 React 官方文档中，对于 useEffect 有这样一句描述：Effects are an escape hatch from the React paradigm。这句话怎么理解呢？我们要结合前面的哲学部分进行思考。React 开发指导思想是数据驱动 UI，因此在 React 程序中，我们总是会思考如何设计与 UI 保持一致的数据，把解决问题的重心放在数据逻辑上。',
+    linkImg: 'https://s3.51cto.com/oss/202401/02/e772662517c7afe96d34365b39429085b875cf.png',
+    linkTitle: '蜕变之始，useEffect 最后一种用法',
+    linkContent: 'React 开发指导思想是数据驱动 UI，因此在 React 程序中，我们总是会思考如何设计与 UI 保持一致的数据，把解决问题的重心放在数据逻辑上。',
+    category: 'React',
+    likes: 2024,
+    comments: 65
+  },
+  {
+    id: 968,
+    author: 'iqseternal',
+    gender: 1,
+    avatar: 'https://avatars.githubusercontent.com/u/81791264?s=48&v=4',
+    releaseTime: '3天前',
+    pageView: 16698,
+    isAttent: false,
+    content: '银河证券认为，当前人工智能仍处在行业发展初期，未来国产大模型在文生图、文生视频等能力上将迎来突破，重点关注AIGC应用细分子行业，随着AIGC应用的加速落地推动行业财务指标边际改善，2024AIGC应用将迎来爆发。',
+    linkImg: 'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1khopO.img?w=630&h=472&m=6',
+    linkTitle: '“科技春晚”CES 2024召开在即！人工智能AIETF(515070)下跌2.22%',
+    linkContent: '今日早盘人工智能概念走弱，截至14:50，人工智能AIETF(515070)下跌2.22%，盘中交易活跃，成交额已达4361万元。从资金净流入方面来看，人工智能AIETF(515070)近5个交易日获得连续资金净流入，合计“吸金”6328.96万元。',
+    category: 'AI',
+    likes: 1024,
+    comments: 68
+  }
+]

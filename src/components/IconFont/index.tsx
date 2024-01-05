@@ -3,11 +3,11 @@ import { Image } from 'react-native'
 import { Icon } from '../../assets'
 
 export default function IconFont({ name, color, size }: {
-  name?: string,
+  name: keyof typeof Icon,
   color?: string,
   size?: number
 }) {
-  const imgUrl = Icon[name as keyof typeof Icon]
+  const imgUrl = Icon[name]
 
   return (
     <Image

@@ -6,7 +6,8 @@
     "module": "CommonJS",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@views/*": ["src/views/*"]
+      "@views/*": ["src/views/*"],
+      "@styles/*": ["src/styles/*"]
     },
     "typeRoots": ["src/types"]
   },
