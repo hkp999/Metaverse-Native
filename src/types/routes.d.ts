@@ -4,7 +4,7 @@ declare global {
 
   declare type RootStackParamList = {
     Home: undefined,
-    Profile: undefined,
+    Detail: undefined,
     Settings: undefined
   }
 

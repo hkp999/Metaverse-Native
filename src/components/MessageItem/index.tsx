@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Dimensions, Image, Text, Pressable } from 'react-native'
+import { View, StyleSheet, Dimensions, Image, Text, Pressable, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import ActiveButton from '@components/ActiveButton'
 import IconFont from '@components/IconFont'
 import { recommendData } from '@views/Home/NavList/Recommend/data'
@@ -57,10 +58,10 @@ const styles = StyleSheet.create({
 })
 
 
-
 const MessageItem = ({ data }: {
   data: typeof recommendData[number]
 }) => {
+  const navigation = useNavigation()
   const [like, setLike] = useState(false)
   return (
     <View style={styles.container}>
@@ -82,22 +83,26 @@ const MessageItem = ({ data }: {
         <ActiveButton style={styles.button} textStyle={globalStyles.baseSize} activeText={{ color: '#ccc' }} />
       </View>
       {/* 文章简介 */}
-      <Text style={[styles.mainTitle, globalStyles.largeSize]} numberOfLines={4}>
-        {data.content}
-      </Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
+        <Text style={[styles.mainTitle, globalStyles.largeSize]} numberOfLines={4}>
+          {data.content}
+        </Text>
+      </TouchableOpacity>
       {/* 文章的标题 */}
-      <View style={[styles.linkView, globalStyles.baseLayout]}>
-        <Image
-          style={styles.linkImg}
-          source={{
-            uri: data.linkImg
-          }}
-        />
-        <View style={{ flex: 1, marginLeft: 10 }}>
-          <Text style={[globalStyles.largeSize, globalStyles.baseFont]} numberOfLines={1}>{data.linkTitle}</Text>
-          <Text style={globalStyles.smallSize} numberOfLines={2}>{data.linkContent}</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
+        <View style={[styles.linkView, globalStyles.baseLayout]}>
+          <Image
+            style={styles.linkImg}
+            source={{
+              uri: data.linkImg
+            }}
+          />
+          <View style={{ flex: 1, marginLeft: 10 }}>
+            <Text style={[globalStyles.largeSize, globalStyles.baseFont]} numberOfLines={1}>{data.linkTitle}</Text>
+            <Text style={globalStyles.smallSize} numberOfLines={2}>{data.linkContent}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
       {/* 点赞 && 评论 */}
       <View style={[globalStyles.baseLayout, { width: '100%', marginTop: 10 }]}>
         <View style={[globalStyles.baseLayout, { justifyContent: 'flex-start' }]}>
@@ -120,6 +125,7 @@ const MessageItem = ({ data }: {
         </View>
       </View>
     </View>
+
   )
 }
 
