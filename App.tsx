@@ -4,7 +4,6 @@ import TableBarBottom from '@components/TableBarBottom';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {View} from 'react-native'
 import Detail from '@views/Detail';
-
 import './src/styles/global';
 
 function EmptyScreen() {

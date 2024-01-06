@@ -1,4 +1,5 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { NavigationProp } from '@react-navigation/native'
 
 declare global {
 
@@ -8,8 +9,9 @@ declare global {
     Settings: undefined
   }
 
+  type NavigatePage = NavigationProp<RootStackParamList>
   interface ScreenProps<T extends keyof RootStackParamList> {
-    navigation:  NativeStackNavigationProp<RootStackParamList, T>
+    navigation:  NativeStackNavigationProp<RootStackParamList, T>,
   }
 }
 

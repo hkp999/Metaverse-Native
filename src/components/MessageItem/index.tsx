@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Dimensions, Image, Text, Pressable, TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
 import ActiveButton from '@components/ActiveButton'
 import IconFont from '@components/IconFont'
 import { recommendData } from '@views/Home/NavList/Recommend/data'
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 const MessageItem = ({ data }: {
   data: typeof recommendData[number]
 }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<NavigatePage>()
   const [like, setLike] = useState(false)
   return (
     <View style={styles.container}>
