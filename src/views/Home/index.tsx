@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet,StatusBar,TouchableOpacity } from 'react-native'
 import IconFont from '@components/IconFont'
-import NavList from './NavList'
+import TableBarTop from '@components/TableBarTop'
 
 const styles = StyleSheet.create({
   inputView:{
@@ -61,7 +61,8 @@ const Home: React.FC<ScreenProps<'Home'>> = ({navigation}) => {
           </View>
         </TouchableOpacity>
       </View>
-      <NavList />
+      {/* 顶部选项卡 */}
+      <TableBarTop />
   </View>
   )
 }

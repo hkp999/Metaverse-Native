@@ -7,7 +7,8 @@ import MessageItem from '@components/MessageItem'
 
 const styles = StyleSheet.create({
   Swiper: {
-    height: 150
+    height: 150,
+    marginTop: 20
   },
   HeaderTitle: {
     margin: 20,
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
 const Recommend = () => {
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView style={{backgroundColor: '#fff'}}>
         {/* 轮播图 */}
         <View style={styles.Swiper}>
           <SwiperComponent />
