@@ -1,13 +1,10 @@
 import React from 'react'
-import { View,Text } from 'react-native'
+import { Text } from 'react-native'
 
-const News = () => {
+export default function Information() {
   return (
-    <Text>
-      快讯页面
-    </Text>
+    <>
+        <Text>我是资讯页面</Text>
+    </>
   )
 }
-
-export default News
-

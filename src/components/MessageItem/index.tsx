@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Dimensions, Image, Text, Pressable, TouchableOpacity } from 'react-native'
-import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import ActiveButton from '@components/ActiveButton'
 import IconFont from '@components/IconFont'
-import { recommendData } from '@views/Home/NavList/Recommend/data'
+import { recommendData } from '@views/Home/Recommend/data'
 
 const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({

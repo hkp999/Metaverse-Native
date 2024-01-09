@@ -6,7 +6,13 @@ declare global {
   declare type RootStackParamList = {
     Home: undefined,
     Detail: undefined,
-    Settings: undefined
+    Settings: undefined,
+    News: undefined,
+    Recommend: undefined,
+    Information: undefined,
+    Concern: undefined,
+    SpecialTopic: undefined,
+    Tag: undefined
   }
 
   type NavigatePage = NavigationProp<RootStackParamList>
