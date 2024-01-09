@@ -12,7 +12,8 @@ declare global {
     Information: undefined,
     Concern: undefined,
     SpecialTopic: undefined,
-    Tag: undefined
+    Tag: undefined,
+    TopicDetails: undefined
   }
 
   type NavigatePage = NavigationProp<RootStackParamList>

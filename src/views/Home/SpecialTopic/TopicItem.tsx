@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, StyleSheet, Dimensions, Image, Text } from 'react-native'
+import { View, StyleSheet, Dimensions, Image, Text, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import data from './data'
 
 const { width } = Dimensions.get('window')
@@ -30,19 +31,22 @@ const styles = StyleSheet.create({
 })
 
 const TopicItem = ({ description, title, imgUrl, count }: typeof data[number]) => {
+  const navigation = useNavigation<NavigatePage>()
   return (
-    <View style={styles.contentView}>
-      <Image source={{
-        uri: imgUrl
-      }}
-        style={styles.img}
-      />
-      <View style={styles.content}>
-        <Text style={[globalStyles.baseBold, globalStyles.largeSize, globalStyles.baseFont]} numberOfLines={1}>{title}</Text>
-        <Text style={[globalStyles.smallSize, styles.description]} numberOfLines={3}>{description}</Text>
-        <Text style={[globalStyles.smallSize]}>{count} 篇文章</Text>
+    <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate('TopicDetails')}>
+      <View style={styles.contentView}>
+        <Image source={{
+          uri: imgUrl
+        }}
+          style={styles.img}
+        />
+        <View style={styles.content}>
+          <Text style={[globalStyles.baseBold, globalStyles.largeSize, globalStyles.baseFont]} numberOfLines={1}>{title}</Text>
+          <Text style={[globalStyles.smallSize, styles.description]} numberOfLines={3}>{description}</Text>
+          <Text style={[globalStyles.smallSize]}>{count} 篇文章</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
