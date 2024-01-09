@@ -1,10 +1,15 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { View } from 'react-native'
+import TimeLine from './TimeLine'
 
 export default function Information() {
   return (
-    <>
-        <Text>我是资讯页面</Text>
-    </>
+    <View style={{
+      backgroundColor: '#fff',
+      flex: 1,
+      paddingVertical: 20
+    }}>
+        <TimeLine />
+    </View>
   )
 }
