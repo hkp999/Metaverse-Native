@@ -8,5 +8,6 @@ export default {
   Comment: require('./评论.png'),
   Circle: require('./圈子.png'),
   Time: require('./时间.png'),
-  Article: require('./文章.png')
+  Article: require('./文章.png'),
+  ArrowRight: require('./右箭头.png')
 }
