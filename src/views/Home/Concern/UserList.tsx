@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: width / 2.5,
-    paddingVertical: 10,
-    borderRadius: 5,
+    paddingVertical: 20,
+    borderRadius: 4,
     marginRight: 10
   },
   img: {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 
 const UserList = ({ imgUrl, user, gender, fan, attent }:typeof userList[number]) => {
   return (
-    <View style={[styles.contentView]}>
+    <View style={[styles.contentView, globalStyles.baseShadow, {backgroundColor: '#f5f5f5'}]}>
       <View>
         <Image
           style={styles.img}
@@ -62,7 +62,7 @@ const UserList = ({ imgUrl, user, gender, fan, attent }:typeof userList[number])
         </View>
       </View>
       <Text style={[globalStyles.baseFont, { marginTop: 5 }]}>{user}</Text>
-      <Text style={[globalStyles.smallSize, globalStyles.baseFont, { marginVertical: 10 }]}>{fan}粉丝·{attent}关注</Text>
+      <Text style={[globalStyles.smallSize, globalStyles.baseFont, { marginVertical: 15 }]}>{fan}粉丝·{attent}关注</Text>
       <ActiveButton
         style={styles.button}
         textStyle={styles.buttonText}

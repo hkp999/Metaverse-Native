@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
   },
   scroll: {
     flexDirection: 'row',
-    height: 180,
-    paddingLeft: 10
+    paddingLeft: 10,
+    paddingBottom: 20
   }
 })
 
@@ -27,15 +27,15 @@ function Concern() {
       </View>
       <View style={{marginVertical: 20}}>
         <ScrollView
-          style={styles.scroll}
+          contentContainerStyle={styles.scroll}
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
         >
           {
             userList.map(item => <UserList key={item.user} {...item} />)
           }
         </ScrollView>
       </View>
-
     </View>
   )
 }
