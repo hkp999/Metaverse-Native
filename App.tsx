@@ -23,6 +23,7 @@ export default function App() {
               <Stack.Screen name="Home" component={TableBarBottom} options={{ headerShown: false }} />
               <Stack.Screen name="TopicDetails" component={TopicDetails} />
               <Stack.Screen name="Detail" component={Detail} />
+              <Stack.Screen name="User" component={EmptyScreen} />
             </>
           ) : (
             <>
