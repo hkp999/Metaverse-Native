@@ -14,7 +14,9 @@ declare global {
     SpecialTopic: undefined,
     Tag: undefined,
     TopicDetails: {
-      imgUrl?: string
+      imgUrl?: string,
+      title?: string,
+      count?: number
     }
   }
 

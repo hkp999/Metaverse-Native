@@ -35,7 +35,9 @@ const TopicItem = ({ description, title, imgUrl, count }: typeof data[number]) =
   const navigation = useNavigation<NavigatePage>()
   return (
     <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate('TopicDetails',{
-      imgUrl: imgUrl
+      imgUrl,
+      title,
+      count
     })}>
       <Animated.View style={styles.contentView} entering={FadeInRight}>
         <Image
