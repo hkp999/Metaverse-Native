@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Dimensions, Image, Text, TouchableOpacity } from 'react-native'
+import Animated, { FadeInRight } from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native'
 import data from './data'
 
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   img: {
-    width: '100%',
+    width: width / 2 - 15,
     height: 100
   },
   content: {
@@ -33,11 +34,14 @@ const styles = StyleSheet.create({
 const TopicItem = ({ description, title, imgUrl, count }: typeof data[number]) => {
   const navigation = useNavigation<NavigatePage>()
   return (
-    <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate('TopicDetails')}>
-      <View style={styles.contentView}>
-        <Image source={{
-          uri: imgUrl
-        }}
+    <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate('TopicDetails',{
+      imgUrl: imgUrl
+    })}>
+      <Animated.View style={styles.contentView} entering={FadeInRight}>
+        <Image
+          source={{
+            uri: imgUrl
+          }}
           style={styles.img}
         />
         <View style={styles.content}>
@@ -45,7 +49,7 @@ const TopicItem = ({ description, title, imgUrl, count }: typeof data[number]) =
           <Text style={[globalStyles.smallSize, styles.description]} numberOfLines={3}>{description}</Text>
           <Text style={[globalStyles.smallSize]}>{count} 篇文章</Text>
         </View>
-      </View>
+      </Animated.View>
     </TouchableOpacity>
   )
 }

@@ -17,20 +17,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: true }}>
-        {
-          isLogin ? (
-            <>
-              <Stack.Screen name="Home" component={TableBarBottom} options={{ headerShown: false }} />
-              <Stack.Screen name="TopicDetails" component={TopicDetails} />
-              <Stack.Screen name="Detail" component={Detail} />
-              <Stack.Screen name="User" component={EmptyScreen} />
-            </>
-          ) : (
-            <>
-              <Stack.Screen name="Settings" component={EmptyScreen} />
-            </>
-          )
-        }
+        <Stack.Screen name="Home" component={TableBarBottom} options={{ headerShown: false }} />
+        <Stack.Screen name="TopicDetails" component={TopicDetails} />
+        <Stack.Screen name="Detail" component={Detail} />
+        <Stack.Screen name="User" component={EmptyScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

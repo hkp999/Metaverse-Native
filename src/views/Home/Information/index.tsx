@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, SafeAreaView, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
+import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated'
 import data from './data'
 
 const styles = StyleSheet.create({
@@ -25,10 +26,10 @@ const News: React.FC<ScreenProps<'News'>> = ({ navigation }) => {
     <SafeAreaView>
       <ScrollView style={{ backgroundColor: '#fff' }}>
         {
-          data.map(item => {
+          data.map((item, index) => {
             return (
               <TouchableOpacity key={item.id} onPress={() => navigation.navigate('Detail')}>
-                <View style={styles.contentView}>
+                <Animated.View style={styles.contentView} entering={index % 2 === 0 ? FadeInLeft : FadeInRight}>
                   <Text style={[styles.contentText]} numberOfLines={3}>{item.title}</Text>
                   <View style={[styles.footerView, globalStyles.baseLayout]}>
                     <Text>
@@ -37,7 +38,7 @@ const News: React.FC<ScreenProps<'News'>> = ({ navigation }) => {
                     </Text>
                     <Text>{item.releaseTime}</Text>
                   </View>
-                </View>
+                </Animated.View>
               </TouchableOpacity>
             )
           })

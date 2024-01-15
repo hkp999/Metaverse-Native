@@ -1,4 +1,4 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack'
 import { NavigationProp } from '@react-navigation/native'
 
 declare global {
@@ -13,13 +13,18 @@ declare global {
     Concern: undefined,
     SpecialTopic: undefined,
     Tag: undefined,
-    TopicDetails: undefined
+    TopicDetails: {
+      imgUrl?: string
+    }
   }
+
+  type TopicDetailsProp = NativeStackScreenProps<RootStackParamList, 'TopicDetails'>
 
   type NavigatePage = NavigationProp<RootStackParamList>
   interface ScreenProps<T extends keyof RootStackParamList> {
     navigation:  NativeStackNavigationProp<RootStackParamList, T>,
   }
+
 }
 
 export {}

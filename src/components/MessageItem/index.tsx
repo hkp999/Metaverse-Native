@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Dimensions, Image, Text, Pressable, TouchableOpacity } from 'react-native'
+import Animated,{FadeIn, SlideInLeft, SlideInRight} from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native'
 import ActiveButton from '@components/ActiveButton'
 import IconFont from '@components/IconFont'
@@ -64,9 +65,9 @@ const MessageItem = ({ data }: {
   const navigation = useNavigation<NavigatePage>()
   const [like, setLike] = useState(false)
   return (
-    <View style={styles.container}>
+    <Animated.View style={styles.container} entering={FadeIn}>
       {/* 作者信息 && 关注 */}
-      <View style={[globalStyles.baseLayout, styles.content]}>
+      <Animated.View style={[globalStyles.baseLayout, styles.content]} entering={SlideInLeft}>
         <View style={[styles.contentLeft, globalStyles.baseLayout, { justifyContent: 'flex-start' }]}>
           <Image
             style={styles.image}
@@ -81,16 +82,16 @@ const MessageItem = ({ data }: {
 
         </View>
         <ActiveButton style={styles.button} textStyle={globalStyles.baseSize} activeText={{ color: '#ccc' }} />
-      </View>
+      </Animated.View>
       {/* 文章简介 */}
       <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
-        <Text style={[styles.mainTitle, globalStyles.largeSize]} numberOfLines={4}>
+        <Animated.Text style={[styles.mainTitle, globalStyles.largeSize]} numberOfLines={4} entering={SlideInRight}>
           {data.content}
-        </Text>
+        </Animated.Text>
       </TouchableOpacity>
       {/* 文章的标题 */}
       <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
-        <View style={[styles.linkView, globalStyles.baseLayout]}>
+        <Animated.View style={[styles.linkView, globalStyles.baseLayout]} entering={SlideInLeft}>
           <Image
             style={styles.linkImg}
             source={{
@@ -101,10 +102,10 @@ const MessageItem = ({ data }: {
             <Text style={[globalStyles.largeSize, globalStyles.baseFont]} numberOfLines={1}>{data.linkTitle}</Text>
             <Text style={globalStyles.smallSize} numberOfLines={2}>{data.linkContent}</Text>
           </View>
-        </View>
+        </Animated.View>
       </TouchableOpacity>
       {/* 点赞 && 评论 */}
-      <View style={[globalStyles.baseLayout, { width: '100%', marginTop: 10 }]}>
+      <Animated.View style={[globalStyles.baseLayout, { width: '100%', marginTop: 10 }]} entering={SlideInRight}>
         <View style={[globalStyles.baseLayout, { justifyContent: 'flex-start' }]}>
           <IconFont name='Circle' size={16} color='rgb(21,129,255)' />
           <Text style={{ marginLeft: 2 }}>圈子：{data.category}</Text>
@@ -123,8 +124,8 @@ const MessageItem = ({ data }: {
             <Text style={{ marginLeft: 2 }}>{data.comments}</Text>
           </View>
         </View>
-      </View>
-    </View>
+      </Animated.View>
+    </Animated.View>
 
   )
 }
