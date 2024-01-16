@@ -1,9 +1,14 @@
-import React from 'react'
-import { View, StyleSheet, ImageBackground, Dimensions, Text, ScrollView } from 'react-native'
+import React, { useState, useRef } from 'react'
+import { View, StyleSheet, ImageBackground, Dimensions, Text, ScrollView, SafeAreaView, NativeSyntheticEvent, NativeScrollEvent } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
+import MessageItem from '@components/MessageItem'
+import { recommendData } from '@views/Home/Recommend/data'
 
 const { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   img: {
     width,
     height: 200,
@@ -13,26 +18,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18
   },
-  imgView :{
+  imgView: {
     flex: 1,
     justifyContent: 'space-between',
     padding: 20,
-    paddingBottom: 30
   },
   titleView: {
+    width,
+    padding: 20,
+    paddingBottom: 30,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
-  listView:{
+  innerScrollView: {
     width,
-    height: 550,
-  },
-  mainView:{
-    position: "absolute",
-    top: -20,
-    width,
-    height: 550,
-    backgroundColor: '#000',
+    height: height - 120,
+    paddingVertical: 40,
+    transform: [{ translateY: -20 }],
+    backgroundColor: '#fff',
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
     zIndex: 10
@@ -41,25 +44,29 @@ const styles = StyleSheet.create({
 const TopicDetails = ({ route }: any) => {
   const { imgUrl, title, count } = (route as TopicDetailsProp['route']).params
   return (
-    <ScrollView>
-      <ImageBackground
-        source={{
-          uri: imgUrl
-        }}
-        style={styles.img}
-      >
-        <View style={styles.imgView}>
-          <Text style={styles.title}>{title}</Text>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <ImageBackground
+          source={{
+            uri: imgUrl
+          }}
+          style={styles.img}
+        >
+          <View style={styles.imgView}>
+            <Text style={styles.title}>{title}</Text>
+          </View>
           <View style={styles.titleView}>
             <Text style={{ color: '#fff' }}>共有{count}篇文章</Text>
             <Text style={{ color: '#fff' }}>更新时间：2024-01-15 23:14</Text>
           </View>
-        </View>
-      </ImageBackground>
-      <View style={styles.listView}>
-        <View style={styles.mainView}></View>
-      </View>
-    </ScrollView>
+        </ImageBackground>
+        <ScrollView style={styles.innerScrollView} nestedScrollEnabled={true} scrollEnabled={false}>
+          {
+            recommendData.map(item => <MessageItem key={item.linkTitle} data={item} />)
+          }
+        </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
