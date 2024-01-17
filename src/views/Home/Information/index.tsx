@@ -1,49 +1,24 @@
 import React from 'react'
-import { View, Text, SafeAreaView, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
-import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated'
+import { SafeAreaView, FlatList } from 'react-native'
 import data from './data'
+import InforItem from './InforItem'
 
-const styles = StyleSheet.create({
-  contentView: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-  },
-  contentText: {
-    fontSize: 20,
-    color: '#000',
-    height: 90,
-    lineHeight: 28
-  },
-  footerView: {
-    marginVertical: 10,
-  }
-})
+const renderItem = ({ item, index }: {
+  item: typeof data[number],
+  index: number,
+}) => {
+  return <InforItem item={item} index={index} />
+}
 
-const News: React.FC<ScreenProps<'News'>> = ({ navigation }) => {
+const News: React.FC<ScreenProps<'News'>> = () => {
   return (
     <SafeAreaView>
-      <ScrollView style={{ backgroundColor: '#fff' }}>
-        {
-          data.map((item, index) => {
-            return (
-              <TouchableOpacity key={item.id} onPress={() => navigation.navigate('Detail')}>
-                <Animated.View style={styles.contentView} entering={index % 2 === 0 ? FadeInLeft : FadeInRight}>
-                  <Text style={[styles.contentText]} numberOfLines={3}>{item.title}</Text>
-                  <View style={[styles.footerView, globalStyles.baseLayout]}>
-                    <Text>
-                      {item.comments}评论
-                      <Text>   {item.pageView}浏览</Text>
-                    </Text>
-                    <Text>{item.releaseTime}</Text>
-                  </View>
-                </Animated.View>
-              </TouchableOpacity>
-            )
-          })
-        }
-      </ScrollView>
+      <FlatList
+        data={data}
+        style={{ backgroundColor: '#fff' }}
+        renderItem={renderItem}
+        keyExtractor={(item) => String(item.id)}
+      />
     </SafeAreaView>
   )
 }

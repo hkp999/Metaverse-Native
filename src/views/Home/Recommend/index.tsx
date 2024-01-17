@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
+import { Text, View, StyleSheet, SafeAreaView, FlatList, ScrollView } from 'react-native'
 import Animated, { SlideInDown, SlideInUp } from 'react-native-reanimated'
 import SwiperComponent from '@components/SwiperComponent'
 import IconFont from '@components/IconFont'
@@ -30,32 +30,38 @@ const styles = StyleSheet.create({
   },
 })
 
+const renderItem = ({ item }: { item: typeof recommendData[number], index: number }) => {
+  return <MessageItem data={item} />
+}
+
+const HeaderComponent = () => {
+
+  return (
+    <>
+      {/* 轮播图 */}
+      <Animated.View style={styles.Swiper} entering={SlideInDown}>
+        <SwiperComponent />
+      </Animated.View>
+      {/* 标题 */}
+      <Animated.View style={styles.HeaderTitle} entering={SlideInUp}>
+        <Text style={[styles.title, globalStyles.baseFont]}>最新动态</Text>
+        <View style={styles.HeaderFilter}>
+          <IconFont name='Filter' size={16} />
+          <Text style={[styles.FilterTitle, globalStyles.baseFont]}>筛选</Text>
+        </View>
+      </Animated.View>
+    </>
+  )
+}
 const Recommend = () => {
   return (
-    <SafeAreaView>
-      <ScrollView style={{backgroundColor: '#fff'}}>
-        {/* 轮播图 */}
-        <Animated.View style={styles.Swiper} entering={SlideInDown}>
-          <SwiperComponent />
-        </Animated.View>
-        {/* 标题 */}
-
-        <Animated.View style={styles.HeaderTitle} entering={SlideInUp}>
-          <Text style={[styles.title, globalStyles.baseFont]}>最新动态</Text>
-          <View style={styles.HeaderFilter}>
-            <IconFont name='Filter' size={16} />
-            <Text style={[styles.FilterTitle, globalStyles.baseFont]}>筛选</Text>
-          </View>
-        </Animated.View>
-        {/* 主要内容 */}
-        {
-          recommendData.map(item => {
-            return (
-              <MessageItem key={item.linkTitle} data={item} />
-            )
-          })
-        }
-      </ScrollView>
+    <SafeAreaView style={{ backgroundColor: '#fff' }}>
+      <FlatList
+        style={{ backgroundColor: '#fff' }}
+        renderItem={renderItem}
+        data={recommendData}
+        ListHeaderComponent={HeaderComponent}
+      />
     </SafeAreaView>
   )
 }
