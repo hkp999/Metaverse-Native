@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Dimensions, Image, Text, Pressable, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Dimensions, Image, Text, Pressable, TouchableOpacity, ViewStyle } from 'react-native'
 import Animated,{FadeIn, SlideInLeft, SlideInRight} from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native'
 import ActiveButton from '@components/ActiveButton'
@@ -59,13 +59,14 @@ const styles = StyleSheet.create({
 })
 
 
-const MessageItem = ({ data }: {
-  data: typeof recommendData[number]
+const MessageItem = ({ data, style }: {
+  data: typeof recommendData[number],
+  style?: ViewStyle
 }) => {
   const navigation = useNavigation<NavigatePage>()
   const [like, setLike] = useState(false)
   return (
-    <Animated.View style={styles.container} entering={FadeIn}>
+    <Animated.View style={[styles.container, style]} entering={FadeIn}>
       {/* 作者信息 && 关注 */}
       <Animated.View style={[globalStyles.baseLayout, styles.content]} entering={SlideInLeft}>
         <View style={[styles.contentLeft, globalStyles.baseLayout, { justifyContent: 'flex-start' }]}>
