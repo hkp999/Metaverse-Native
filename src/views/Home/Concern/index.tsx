@@ -12,8 +12,9 @@ const styles = StyleSheet.create({
   },
   scroll: {
     flexDirection: 'row',
+    height: 240,
     paddingLeft: 10,
-    paddingBottom: 20
+    paddingVertical: 20
   }
 })
 
@@ -25,17 +26,15 @@ function Concern() {
         <Text style={[globalStyles.baseBold, { fontSize: 18, color: '#333' }]}>推荐用户</Text>
         <Text style={{ color: '#000' }}>查看更多<IconFont name='ArrowRight' size={10} /></Text>
       </View>
-      <View style={{marginVertical: 20}}>
-        <ScrollView
-          contentContainerStyle={styles.scroll}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-        >
-          {
-            userList.map(item => <UserList key={item.user} {...item} />)
-          }
-        </ScrollView>
-      </View>
+      <ScrollView
+        contentContainerStyle={styles.scroll}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+      >
+        {
+          userList.map(item => <UserList key={item.user} {...item} />)
+        }
+      </ScrollView>
     </View>
   )
 }
