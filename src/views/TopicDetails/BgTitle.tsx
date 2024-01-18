@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const BgTitle = ({count, imgUrl, title}:{
+const BgTitle = ({ count, imgUrl, title }: {
   count?: number,
   imgUrl?: string,
   title?: string

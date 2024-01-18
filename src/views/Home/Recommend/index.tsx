@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Text, View, StyleSheet, SafeAreaView, FlatList, ScrollView } from 'react-native'
 import Animated, { SlideInDown, SlideInUp } from 'react-native-reanimated'
 import SwiperComponent from '@components/SwiperComponent'
 import IconFont from '@components/IconFont'
 import { recommendData } from './data'
 import MessageItem from '@components/MessageItem'
+import BottomLoading from '@components/BottomLoading'
 
 const styles = StyleSheet.create({
   Swiper: {
@@ -54,6 +55,11 @@ const HeaderComponent = () => {
   )
 }
 const Recommend = () => {
+  const [loading,setLoading] = useState(false)
+  const getMoreMsg = () => {
+    setLoading(true)
+  }
+
   return (
     <SafeAreaView style={{ backgroundColor: '#fff' }}>
       <FlatList
@@ -61,6 +67,9 @@ const Recommend = () => {
         renderItem={renderItem}
         data={recommendData}
         ListHeaderComponent={HeaderComponent}
+        ListFooterComponent={loading ? <BottomLoading title='正在前往元宇宙···' /> : <></>}
+        onEndReached={getMoreMsg}
+        onEndReachedThreshold={0.1}
       />
     </SafeAreaView>
   )

@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-end',
     height: 40,
-    backgroundColor: '#f4ded2'
   },
   text: {
     fontSize: 16,
