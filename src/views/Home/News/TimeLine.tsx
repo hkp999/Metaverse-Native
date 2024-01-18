@@ -39,13 +39,17 @@ const TimeLine = () => {
   return (
     <Timeline
       data={data}
+      renderDetail={renderDetail}
       lineWidth={1}
       lineColor='#f1f1f1'
       showTime={false}
       innerCircle='icon'
+      listViewStyle={{
+        paddingVertical: 20
+      }}
       circleColor='#fff'
       renderFullLine={true}
-      renderDetail={renderDetail}
+      isUsingFlatlist={true}
     />
   )
 }

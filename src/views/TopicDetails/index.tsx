@@ -32,14 +32,13 @@ const renderItem = ({ item, index }: { item: typeof recommendData[number], index
 
 const TopicDetails = ({ route }: any) => {
   const { imgUrl, title, count } = (route as TopicDetailsProp['route']).params
-  const [isScroll, setIsScroll ] = useState(false)
-
+  const [isScroll, setIsScroll] = useState(false)
 
   const outScrollOb = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const offsetY = e.nativeEvent.contentOffset.y
-    if(offsetY >= 100 && !isScroll) {
+    if (offsetY >= 100 && !isScroll) {
       setIsScroll(true)
-    }else if (offsetY < 100 && isScroll) {
+    } else if (offsetY < 100 && isScroll) {
       setIsScroll(false)
     }
   }

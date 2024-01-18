@@ -4,8 +4,10 @@ import { ImageBackground, View, Text, StyleSheet, Dimensions } from 'react-nativ
 const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   img: {
+    position: 'relative',
+    top: 0,
     width,
-    height: 200,
+    height: 210,
   },
   title: {
     color: '#fff',
