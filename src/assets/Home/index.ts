@@ -1,13 +1,13 @@
 export default {
-  Search: require('./搜索.png'),
-  Filter: require('./筛选.png'),
-  Man: require('./男性.png'),
-  Woman: require('./女性.png'),
-  Like: require('./点赞.png'),
-  LikeActive: require('./点赞1.png'),
-  Comment: require('./评论.png'),
-  Circle: require('./圈子.png'),
-  Time: require('./时间.png'),
-  Article: require('./文章.png'),
-  ArrowRight: require('./右箭头.png')
+  Search: require('./search.png'),
+  Filter: require('./filter.png'),
+  Man: require('./man.png'),
+  Woman: require('./woman.png'),
+  Like: require('./like.png'),
+  LikeActive: require('./likeActive.png'),
+  Comment: require('./comment.png'),
+  Circle: require('./circle.png'),
+  Time: require('./time.png'),
+  Article: require('./article.png'),
+  ArrowRight: require('./arrowRight.png')
 }

@@ -56,7 +56,7 @@ const UserList = ({ imgUrl, user, gender, fan, attent }:typeof userList[number])
         />
         <View style={styles.iconView}>
           <Image
-            source={gender === 1 ? require('@assets/Home/男性.png') : require('@assets/Home/女性.png')}
+            source={gender === 1 ? require('@assets/Home/man.png') : require('@assets/Home/woman.png')}
             style={styles.icon}
           />
         </View>
