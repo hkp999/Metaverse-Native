@@ -3,6 +3,7 @@ import React from 'react'
 import { Text, View, StyleSheet, ScrollView } from 'react-native'
 import UserList from './UserList'
 import { userList } from './data'
+import NullData from '@components/NullData'
 
 const styles = StyleSheet.create({
   contentView: {
@@ -35,6 +36,7 @@ function Concern() {
           userList.map(item => <UserList key={item.user} {...item} />)
         }
       </ScrollView>
+      <NullData />
     </View>
   )
 }
