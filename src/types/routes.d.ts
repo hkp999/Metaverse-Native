@@ -7,6 +7,8 @@ declare global {
     Home: undefined,
     Detail: undefined,
     Settings: undefined,
+    Message: undefined,
+    Community: undefined,
     News: undefined,
     Recommend: undefined,
     Information: undefined,
