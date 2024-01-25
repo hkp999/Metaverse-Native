@@ -1,10 +1,17 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import Domain from './Domain'
 
+const styles = StyleSheet.create({
+  messageView: {
+    flex: 1,
+    backgroundColor: '#fff'
+  }
+})
 const Message = () => {
   return (
-    <View>
-      <Text>目前为消息页</Text>
+    <View style={styles.messageView}>
+      <Domain />
     </View>
   )
 }
