@@ -54,7 +54,7 @@ const Domain = () => {
           return (
             <TouchableOpacity onPress={goDetail} key={item.title}>
               <View style={[styles.iconView, { backgroundColor: item.bgColor }]}>
-                <IconFont name={item.iconName} size={36} color="#fff" />
+                <IconFont name={item.iconName} size={30} color="#fff" />
               </View>
               <Text style={styles.iconText}>{item.title}</Text>
             </TouchableOpacity>

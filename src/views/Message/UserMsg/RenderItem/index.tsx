@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     height: 80,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
     backgroundColor: '#fff'
   },
   img: {
@@ -27,7 +27,20 @@ const styles = StyleSheet.create({
     color: '#333332'
   },
   contentText: {
-    lineHeight: 32
+    lineHeight: 32,
+    flex: 1
+  },
+  iconView: {
+    paddingLeft: 10,
+    borderRadius: 999,
+    justifyContent: 'center',
+  },
+  iconText: {
+    fontSize: 10,
+    backgroundColor: '#ff4d4f',
+    color: '#fff',
+    borderRadius: 999,
+    paddingHorizontal: 4
   }
 })
 const RenderItem = ({ data }: {
@@ -52,7 +65,9 @@ const RenderItem = ({ data }: {
         </View>
         <View style={globalStyles.baseLayout}>
           <Text style={styles.contentText} numberOfLines={1}>很高心能认识你！希望以后能和你共同工作！！！</Text>
-          <Text>36</Text>
+          <View style={styles.iconView}>
+            <Text style={styles.iconText}>446</Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
