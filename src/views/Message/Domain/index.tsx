@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
   domainView: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 30
+    marginTop: 30,
+    marginBottom: 10
   },
   iconView: {
     borderRadius: 4,
