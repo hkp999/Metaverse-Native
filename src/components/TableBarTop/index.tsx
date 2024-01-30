@@ -28,7 +28,6 @@ export default function TableBarTop() {
       <TopTab.Screen name='资讯' component={Information}></TopTab.Screen>
       <TopTab.Screen name='快讯' component={News}></TopTab.Screen>
       <TopTab.Screen name='专题' component={SpecialTopic}></TopTab.Screen>
-      <TopTab.Screen name='标题' component={Tag}></TopTab.Screen>
     </TopTab.Navigator>
   )
 }
