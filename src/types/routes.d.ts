@@ -6,7 +6,7 @@ declare global {
   declare type RootStackParamList = {
     Home: undefined,
     Detail: undefined,
-    Settings: undefined,
+    Personal: undefined,
     Message: undefined,
     Community: undefined,
     News: undefined,

@@ -4,6 +4,10 @@ export const baseFont = makeStyle({
   color: '#000',
 })
 
+export const baseTextColor = makeStyle({
+  color: '#333'
+})
+
 export const baseSize = makeStyle({
   fontSize: 14,
 })

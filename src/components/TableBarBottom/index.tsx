@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '@views/Home'
-import Settings from '@views/Settings';
+import Personal from '@views/Personal';
 import Message from '@views/Message'
 import Community from '@views/Community';
 import IconFont from '../IconFont'
@@ -31,7 +31,7 @@ export default function TableBarBottom() {
       <Tab.Screen name='首页' component={Home}></Tab.Screen>
       <Tab.Screen name='社区' component={Community}></Tab.Screen>
       <Tab.Screen name='消息' component={Message}></Tab.Screen>
-      <Tab.Screen name='个人中心' component={Settings}></Tab.Screen>
+      <Tab.Screen name='个人中心' component={Personal}></Tab.Screen>
     </Tab.Navigator>
   )
 }
