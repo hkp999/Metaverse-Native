@@ -5,8 +5,8 @@ import { View, StyleSheet, Text, DrawerLayoutAndroid, Image, Dimensions } from '
 const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   mainView: {
-    width: width - 40,
-    marginLeft: 20,
+    width: width - 20,
+    marginLeft: 10,
     marginVertical: 20,
     overflow: 'hidden',
     paddingHorizontal: 20,
