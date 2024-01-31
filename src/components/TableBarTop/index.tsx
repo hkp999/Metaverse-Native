@@ -6,7 +6,6 @@ import Recommend from '@views/Home/Recommend'
 import Information from '@views/Home/Information'
 import News from '@views/Home/News'
 import SpecialTopic from '@views/Home/SpecialTopic'
-import Tag from '@views/Home/Tag'
 
 
 const TopTab = createMaterialTopTabNavigator()

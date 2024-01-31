@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import PersonalHeader from './PersonalHeader'
 import PersonalDomain from './PersonalDomain'
+import PersonalFooter from './PersonalFooter'
 
 const styles = StyleSheet.create({
   mainView: {
@@ -14,6 +15,7 @@ export default function Personal() {
     <View style={styles.mainView}>
       <PersonalHeader />
       <PersonalDomain />
+      <PersonalFooter />
     </View>
   )
 }

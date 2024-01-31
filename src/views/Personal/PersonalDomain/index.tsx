@@ -1,7 +1,7 @@
 import IconFont from '@components/IconFont'
 import { baseWidth } from '@styles/base'
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 const data = [
   {
@@ -47,11 +47,11 @@ const PersonalDomain = () => {
       {
         data.map((item) => {
           return (
-            <View key={item.imgUrl} style={[globalStyles.baseShadow, styles.itemView]}>
+            <TouchableOpacity key={item.imgUrl} style={[globalStyles.baseShadow, styles.itemView]} activeOpacity={0.7}>
               <IconFont name={item.imgUrl} size={30} />
               <Text style={[globalStyles.smallSize, globalStyles.baseFont,{marginVertical: 2}]}>{item.name}</Text>
               <Text style={[globalStyles.smallSize]}>{item.desc}</Text>
-            </View>
+            </TouchableOpacity>
           )
         })
       }
