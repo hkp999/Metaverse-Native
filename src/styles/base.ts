@@ -1,4 +1,3 @@
-import { Dimensions } from 'react-native';
 import { makeStyle } from './utils';
 
 export const baseFont = makeStyle({
@@ -43,6 +42,5 @@ export const baseShadow = makeStyle({
   elevation: 5,
 })
 
-export const baseWidth = Dimensions.get('window').width
 
 

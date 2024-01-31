@@ -9,6 +9,7 @@
       "@views/*": ["src/views/*"],
       "@styles/*": ["src/styles/*"],
       "@assets/*": ["src/assets/*"],
+      "@theme/*": ["src/theme/*"]
     },
     "typeRoots": ["src/types"]
   },

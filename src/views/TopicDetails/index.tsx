@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Dimensions, ScrollView, FlatList, SafeAreaView, NativeSyntheticEvent, NativeScrollEvent } from 'react-native'
+import { View, StyleSheet,  ScrollView, FlatList, SafeAreaView, NativeSyntheticEvent, NativeScrollEvent } from 'react-native'
 import MessageItem from '@components/MessageItem'
 import { recommendData } from '@views/Home/Recommend/data'
-import Animated from 'react-native-reanimated'
 import BgTitle from './BgTitle'
 
-const { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -20,8 +18,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   innerScrollView: {
-    width,
-    height: height - 150,
+    width: baseInfo.baseWidth,
+    height: baseInfo.baseHeight - 150,
     backgroundColor: '#fff',
   }
 })

@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Dimensions, Image, Text, Pressable, TouchableOpacity, ViewStyle } from 'react-native'
+import { View, StyleSheet, Image, Text, Pressable, TouchableOpacity, ViewStyle } from 'react-native'
 import Animated,{FadeIn, SlideInLeft, SlideInRight} from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native'
 import ActiveButton from '@components/ActiveButton'
 import IconFont from '@components/IconFont'
 import { recommendData } from '@views/Home/Recommend/data'
 
-const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
-    width: width - 50,
+    width: baseInfo.baseWidth - 50,
     alignItems: 'center',
     marginHorizontal: 25,
     backgroundColor: 'white',

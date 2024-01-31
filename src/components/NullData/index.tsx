@@ -1,11 +1,10 @@
 import React from 'react'
-import { Image, View, StyleSheet, Dimensions, Text } from 'react-native'
+import { Image, View, StyleSheet, Text } from 'react-native'
 
-const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   img: {
-    width: width / 2,
-    height: width / 2
+    width: baseInfo.baseWidth / 2,
+    height: baseInfo.baseWidth / 2
   }
 })
 const NullData = () => {

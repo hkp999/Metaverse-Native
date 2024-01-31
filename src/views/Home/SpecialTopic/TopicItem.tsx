@@ -1,13 +1,12 @@
 import React from 'react'
-import { View, StyleSheet, Dimensions, Image, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
 import Animated, { FadeInRight } from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native'
 import data from './data'
 
-const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   contentView: {
-    width: width / 2 - 15,
+    width: baseInfo.baseWidth / 2 - 15,
     alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 5,
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   img: {
-    width: width / 2 - 15,
+    width: baseInfo.baseWidth / 2 - 15,
     height: 100
   },
   content: {

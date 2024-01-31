@@ -1,16 +1,15 @@
-import ActiveButton from '@components/ActiveButton'
 import React from 'react'
-import { View, StyleSheet, Dimensions, Image, Text } from 'react-native'
+import { View, StyleSheet, Image, Text } from 'react-native'
+import ActiveButton from '@components/ActiveButton'
 import { userList } from './data'
 
-const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   contentView: {
     backgroundColor: '#f2f2f2',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    width: width / 2.5,
+    width: baseInfo.baseWidth / 2.5,
     paddingVertical: 20,
     borderRadius: 4,
     marginRight: 10

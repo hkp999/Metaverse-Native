@@ -1,4 +1,3 @@
-import { baseWidth } from '@styles/base'
 import React from 'react'
 import { View, StyleSheet, TouchableHighlight } from 'react-native'
 import ItemDomain from './ItemDomain'
@@ -28,7 +27,7 @@ const data = [
 
 const styles = StyleSheet.create({
   mainView: {
-    width: baseWidth - 20,
+    width: baseInfo.baseWidth - 20,
     marginLeft: 10,
     marginTop: 20,
     paddingVertical: 10,
@@ -37,7 +36,6 @@ const styles = StyleSheet.create({
   }
 })
 const PersonalFooter = () => {
-
   // TODO: 有关各功能作用区域
   const handleButton = () => {
 

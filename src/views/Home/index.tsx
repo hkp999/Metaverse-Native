@@ -1,10 +1,11 @@
-import React from 'react'
-import { View, Text, Image, StyleSheet,StatusBar,TouchableOpacity } from 'react-native'
+import React, { useContext } from 'react'
+import { View, Text, Image, StyleSheet, StatusBar, TouchableOpacity } from 'react-native'
 import IconFont from '@components/IconFont'
 import TableBarTop from '@components/TableBarTop'
+import { ThemeContext } from '@theme/index'
 
 const styles = StyleSheet.create({
-  inputView:{
+  inputView: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
     height: 50,
     marginHorizontal: 10
   },
-  oninput:{
+  oninput: {
     width: '60%'
   },
   input: {
@@ -34,27 +35,28 @@ const styles = StyleSheet.create({
   statusStyle: {
     color: '#000'
   },
-  navStyle:{
+  navStyle: {
     marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-around'
   }
 })
 
-const Home: React.FC<ScreenProps<'Home'>> = ({navigation}) => {
-
+const Home: React.FC<ScreenProps<'Home'>> = ({ navigation }) => {
+  const { theme } = useContext(ThemeContext)
   return (
-    <View style={{ flex: 1,backgroundColor: '#fff' }}>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
       {/* 状态栏 */}
-      <StatusBar backgroundColor="#fff" barStyle={'dark-content'}/>
+      <StatusBar backgroundColor={theme.bgColor} barStyle={'dark-content'} />
       {/* 搜索框 */}
       <View style={styles.inputView}>
         <Image
-        style={styles.logo}
-        source={{
-          uri: 'https://vitejs.dev/logo-with-shadow.png'
-        }} />
-        <TouchableOpacity style={styles.oninput} onPress={() => navigation.navigate('Settings')}>
+          style={styles.logo}
+          source={{
+            uri: 'https://vitejs.dev/logo-with-shadow.png'
+          }}
+        />
+        <TouchableOpacity style={styles.oninput} onPress={() => navigation.navigate('Detail')}>
           <View style={styles.input}>
             <IconFont name="Search" size={20} />
             <Text style={styles.inputText}>请输入关键字</Text>
@@ -63,7 +65,7 @@ const Home: React.FC<ScreenProps<'Home'>> = ({navigation}) => {
       </View>
       {/* 顶部选项卡 */}
       <TableBarTop />
-  </View>
+    </View>
   )
 }
 

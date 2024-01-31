@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, View } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import TimeLine from './TimeLine'
 
 export default function Information() {
@@ -9,7 +9,7 @@ export default function Information() {
         backgroundColor: '#fff',
         flex: 1,
       }}>
-        <TimeLine />
+      <TimeLine />
     </SafeAreaView>
   )
 }

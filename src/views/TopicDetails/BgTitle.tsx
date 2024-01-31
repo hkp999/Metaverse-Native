@@ -1,12 +1,11 @@
 import React from 'react'
-import { ImageBackground, View, Text, StyleSheet, Dimensions } from 'react-native'
+import { ImageBackground, View, Text, StyleSheet } from 'react-native'
 
-const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   img: {
     position: 'relative',
     top: 0,
-    width,
+    width: baseInfo.baseWidth,
     height: 210,
   },
   title: {
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   titleView: {
-    width,
+    width: baseInfo.baseWidth,
     padding: 20,
     paddingBottom: 30,
     flexDirection: 'row',

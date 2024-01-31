@@ -1,7 +1,6 @@
-import IconFont from '@components/IconFont'
-import { baseWidth } from '@styles/base'
 import React from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import IconFont from '@components/IconFont'
 
 const data = [
   {
@@ -30,12 +29,12 @@ const styles = StyleSheet.create({
   mainView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: baseWidth - 20,
+    width: baseInfo.baseWidth - 20,
     marginLeft: 10
   },
   itemView: {
     height: 100,
-    width: baseWidth / 4 - 15,
+    width: baseInfo.baseWidth / 4 - 15,
     justifyContent: 'center',
     alignItems: 'center'
   }

@@ -1,11 +1,10 @@
 import IconFont from '@components/IconFont'
 import React from 'react'
-import { View, StyleSheet, Text, DrawerLayoutAndroid, Image, Dimensions } from 'react-native'
+import { View, StyleSheet, Text, DrawerLayoutAndroid, Image } from 'react-native'
 
-const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   mainView: {
-    width: width - 20,
+    width: baseInfo.baseWidth - 20,
     marginLeft: 10,
     marginVertical: 20,
     overflow: 'hidden',

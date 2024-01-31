@@ -3,9 +3,9 @@ import { Text, View, StyleSheet, SafeAreaView, FlatList, ScrollView } from 'reac
 import Animated, { SlideInDown, SlideInUp } from 'react-native-reanimated'
 import SwiperComponent from '@components/SwiperComponent'
 import IconFont from '@components/IconFont'
-import { recommendData } from './data'
 import MessageItem from '@components/MessageItem'
 import BottomLoading from '@components/BottomLoading'
+import { recommendData } from './data'
 
 const styles = StyleSheet.create({
   Swiper: {
