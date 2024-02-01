@@ -1,6 +1,6 @@
 import IconFont from '@components/IconFont'
 import React from 'react'
-import { View, StyleSheet, Text, DrawerLayoutAndroid, Image } from 'react-native'
+import { View, StyleSheet, Text, Image, TouchableHighlight } from 'react-native'
 
 const styles = StyleSheet.create({
   mainView: {
@@ -84,7 +84,14 @@ const data = [
     count: 2
   },
 ]
-const PersonalHeader = () => {
+const PersonalHeader = ({setVisible}:{
+  setVisible: Function
+}) => {
+
+  const handleShowSheel = () => {
+    setVisible(true)
+  }
+
   return (
     <View style={[styles.mainView, globalStyles.baseShadow]}>
       {/* 基本信息 */}
@@ -106,9 +113,9 @@ const PersonalHeader = () => {
           </View>
           <View style={globalStyles.baseLayout}>
             <Text style={styles.contentText} numberOfLines={1}>很高心能认识你！希望以后能和你共同工作！！！</Text>
-            <View style={styles.iconView}>
-              <Text style={styles.iconText}><IconFont name="Edit" size={10}></IconFont> 完善资料</Text>
-            </View>
+            <TouchableHighlight style={styles.iconView}  onPress={handleShowSheel} activeOpacity={0.2} underlayColor="#f5f5f5">
+                <Text style={styles.iconText}><IconFont name="Edit" size={10}></IconFont> 完善资料</Text>
+            </TouchableHighlight>
           </View>
         </View>
       </View>
@@ -125,10 +132,6 @@ const PersonalHeader = () => {
           })
         }
       </View>
-      {/* 弹窗 */}
-      <DrawerLayoutAndroid drawerWidth={300} drawerPosition={'left'}  renderNavigationView={() => <Text>呆呆但大大</Text>}>
-        <Text>31313</Text>
-      </DrawerLayoutAndroid>
     </View>
   )
 }
