@@ -19,7 +19,8 @@ declare global {
       imgUrl?: string,
       title?: string,
       count?: number
-    }
+    },
+    Collect: undefined
   }
 
   type TopicDetailsProp = NativeStackScreenProps<RootStackParamList, 'TopicDetails'>

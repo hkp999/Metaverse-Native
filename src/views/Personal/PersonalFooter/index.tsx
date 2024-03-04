@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, TouchableHighlight } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import ItemDomain from './ItemDomain'
 
 const data = [
@@ -36,10 +37,17 @@ const styles = StyleSheet.create({
   }
 })
 const PersonalFooter = () => {
-  // TODO: 有关各功能作用区域
-  const handleButton = () => {
 
+  const navigation = useNavigation<NavigatePage>()
+
+  // TODO: 有关各功能作用区域
+  const handleButton = (route: typeof data[number]['imgName']) => {
+    if(route === 'Collect') {
+      navigation.navigate(route)
+    }
   };
+
+
 
   return (
     <View style={[globalStyles.baseShadow, styles.mainView]}>
@@ -49,7 +57,7 @@ const PersonalFooter = () => {
             <TouchableHighlight key={item.text}
               activeOpacity={0.2}
               underlayColor="#DDDDDD"
-              onPress={handleButton}
+              onPress={() => handleButton(item.imgName)}
             >
               <ItemDomain {...item} />
             </TouchableHighlight>

@@ -6,7 +6,9 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Detail from '@views/Detail';
 import TopicDetails from '@views/TopicDetails';
+import Collect from '@views/Personal/PersonalFooter/Collect';
 import TableBarBottom from '@components/TableBarBottom';
+
 
 
 function EmptyScreen() {
@@ -23,6 +25,7 @@ export default function App() {
         <Stack.Screen name="TopicDetails" component={TopicDetails} />
         <Stack.Screen name="Detail" component={Detail} />
         <Stack.Screen name="User" component={EmptyScreen} />
+        <Stack.Screen name="Collect" component={Collect} />
       </Stack.Navigator>
     </NavigationContainer>
   )
