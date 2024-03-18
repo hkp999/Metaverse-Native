@@ -137,4 +137,9 @@ dependencies {
     }
 }
 
+project.ext.vectoricons = [
+  enableHermes: false,
+  iconFontNames: [ 'MaterialIcons.ttf', 'AntDesign.ttf', 'EvilIcons.ttf' ] // 你想要复制的字体文件的名字
+]
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
