@@ -1,6 +1,7 @@
-import IconFont from '@components/IconFont'
 import React from 'react'
 import { View, StyleSheet, Text, Image, TouchableHighlight } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import IconFont from '@components/IconFont'
 
 const styles = StyleSheet.create({
   mainView: {
@@ -84,12 +85,11 @@ const data = [
     count: 2
   },
 ]
-const PersonalHeader = ({setVisible}:{
-  setVisible: Function
-}) => {
+const PersonalHeader = () => {
 
+  const navigation = useNavigation<NavigatePage>()
   const handleShowSheel = () => {
-    setVisible(true)
+    navigation.navigate('Infor')
   }
 
   return (
