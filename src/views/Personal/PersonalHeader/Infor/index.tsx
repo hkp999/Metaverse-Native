@@ -7,7 +7,7 @@ import DialogAgain from '@components/DialogAgain';
 
 const config = [
   {
-    name: 'user',
+    name: 'avator',
     title: '头像',
     url: "https://avatars.githubusercontent.com/u/107165304?v=4"
   }, {
@@ -32,17 +32,20 @@ const styles = StyleSheet.create({
 
 const Infor = () => {
   const [isVisible,setIsVisble] = useState(false)
-  const [dialogTitle,setDialogTitle] = useState<string | undefined>('')
-  const onClick = (text: string | undefined) => {
+  const [dialogTitle,setDialogTitle] = useState<{text: string | undefined, name: string}>({text: '',name: ''})
+  const onClick = (text: string | undefined, name: string) => {
     setIsVisble(true)
-    setDialogTitle(text)
+    setDialogTitle({
+      text,
+      name
+    })
   }
   return (
     <>
       {
         config.map((item) => {
           return (
-            <ListItem key={item.title} onPress={() => onClick(item.url || item.text)} bottomDivider>
+            <ListItem key={item.title} onPress={() => onClick(item.url || item.text, item.name)} bottomDivider>
               <ListItem.Content>
                 <ListItem.Title style={styles.listTite}>{item.title}</ListItem.Title>
               </ListItem.Content>
