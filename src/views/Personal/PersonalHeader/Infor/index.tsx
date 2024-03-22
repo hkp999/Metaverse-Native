@@ -34,11 +34,11 @@ const Infor = () => {
   const [isVisible,setIsVisble] = useState(false)
   const [dialogTitle,setDialogTitle] = useState<{text: string | undefined, name: string}>({text: '',name: ''})
   const onClick = (text: string | undefined, name: string) => {
-    setIsVisble(true)
     setDialogTitle({
       text,
       name
     })
+    setIsVisble(true)
   }
   return (
     <>
