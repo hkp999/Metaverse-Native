@@ -17,15 +17,14 @@ function EmptyScreen() {
 }
 
 // 判断是否登录
-let isLogin = true
 const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer theme={LightTheme}>
       <Stack.Navigator screenOptions={{ headerShown: true }}>
         {
-          isLogin ?
             <>
+              <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
               <Stack.Screen name="Home" component={TableBarBottom} options={{ headerShown: false }} />
               <Stack.Screen name="TopicDetails" component={TopicDetails} />
               <Stack.Screen name="Detail" component={Detail} />
@@ -33,8 +32,6 @@ export default function App() {
               <Stack.Screen name="Collect" component={Collect} />
               <Stack.Screen name="Infor" component={Infor} />
             </>
-            :
-            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
         }
       </Stack.Navigator>
     </NavigationContainer>
