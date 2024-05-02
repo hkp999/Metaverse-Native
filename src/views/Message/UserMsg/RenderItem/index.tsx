@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4
   }
 })
-const RenderItem = ({ data }: {
+const RenderItem = ({data}: {
   data: any
 }) => {
   return (
@@ -53,20 +53,20 @@ const RenderItem = ({ data }: {
         <Image
           style={styles.img}
           source={{
-            uri: 'https://avatars.githubusercontent.com/u/810438?s=80&v=4'
+            uri: data.item.url
           }}
         />
       </View>
       {/* 信息部分 */}
       <View style={styles.contenView}>
         <View style={globalStyles.baseLayout}>
-          <Text style={styles.nickText} numberOfLines={1}>gaearon</Text>
-          <Text>2022/09/30</Text>
+          <Text style={styles.nickText} numberOfLines={1}>{data.item.username}</Text>
+          <Text>{data.item.datatime}</Text>
         </View>
         <View style={globalStyles.baseLayout}>
-          <Text style={styles.contentText} numberOfLines={1}>很高心能认识你！希望以后能和你共同工作！！！</Text>
+          <Text style={styles.contentText} numberOfLines={1}>{data.item.text}</Text>
           <View style={styles.iconView}>
-            <Text style={styles.iconText}>446</Text>
+            <Text style={styles.iconText}>{data.item.msg_number}</Text>
           </View>
         </View>
       </View>

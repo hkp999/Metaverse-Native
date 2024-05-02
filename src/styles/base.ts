@@ -1,3 +1,4 @@
+import { red } from 'react-native-reanimated/lib/typescript/reanimated2/Colors';
 import { makeStyle } from './utils';
 
 export const baseFont = makeStyle({
@@ -40,6 +41,10 @@ export const baseShadow = makeStyle({
   shadowOpacity: 0.8,
   shadowRadius: 2,
   elevation: 5,
+})
+
+export const baseErrorMsg = makeStyle({
+  color: 'red',
 })
 
 

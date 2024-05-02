@@ -6,6 +6,7 @@ import Recommend from '@views/Home/Recommend'
 import Information from '@views/Home/Information'
 import News from '@views/Home/News'
 import SpecialTopic from '@views/Home/SpecialTopic'
+import BottomLoading from '@components/BottomLoading'
 
 
 const TopTab = createMaterialTopTabNavigator()
@@ -13,13 +14,13 @@ export default function TableBarTop() {
   return (
     <TopTab.Navigator
       initialRouteName='推荐'
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         tabBarAndroidRipple: {
           borderless: false,
           color: 'rgba(0,0,0,.15)',
         },
         lazy: true,
-        lazyPlaceholder: () => <Text>Loading...</Text>
+        lazyPlaceholder: () => <View style={{flex: 1,justifyContent:'center',alignItems: 'center'}}><BottomLoading title='正在前往元宇宙···' /></View>
       })}
     >
       <TopTab.Screen name='关注' component={Concern}></TopTab.Screen>

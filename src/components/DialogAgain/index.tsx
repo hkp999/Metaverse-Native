@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Image, PermissionsAndroid, Platform } from 'react-native';
-import { requestCameraPermission } from '../../config/authority/camera';
+import Authority from '@config/authority';
+
 import {
   Dialog,
   Input,
@@ -33,7 +34,7 @@ const DialogAgain = ({ isVisible, setIsVisble, dialogTitle }: {
 
   const handleOk = () => {
 
-    requestCameraPermission(successFunc,() => {})
+    Authority.requestCameraPermission(successFunc,() => {})
 
     setIsVisble(false)
   }

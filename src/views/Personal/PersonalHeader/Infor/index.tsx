@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Button, Input, ListItem, Text, Avatar } from '@rneui/base';
-import Icon from "react-native-vector-icons/AntDesign"
+import { StyleSheet } from 'react-native'
+import { ListItem, Text, Avatar } from '@rneui/base';
 import DialogAgain from '@components/DialogAgain';
 
 
@@ -18,6 +17,10 @@ const config = [
     name: 'gender',
     title: '性别',
     text: '男'
+  }, {
+    name: 'sign',
+    title: '个性签名',
+    text: '雄关漫道真如铁，而今迈步从头越雄关漫道真如铁，而今迈步从头越雄关漫道真如铁，而今迈步从头越雄关漫道真如铁，而今迈步从头越'
   }, {
     name: 'email',
     title: '邮箱',
@@ -53,7 +56,7 @@ const Infor = () => {
                 item.url ?
                 <Avatar rounded source={{ uri: "https://avatars.githubusercontent.com/u/107165304?v=4" }} />
                 :
-                <Text>{item.text}</Text>
+                <Text numberOfLines={1}  style={{flex: 1, textAlign: 'right'}}>{item.text}</Text>
               }
               <ListItem.Chevron size={30} />
             </ListItem>

@@ -4,10 +4,7 @@ import { RefreshControl } from 'react-native';
 import RenderItem from './RenderItem';
 import HiddenItem from './HiddenItem';
 import Domain from '../Domain';
-
-const listViewData = Array(20)
-  .fill("")
-  .map((_, i) => ({ key: `${i}`, text: `item #${i}` }));
+import listViewData from './data'
 
 const wait = (timeout: number) => {
   return new Promise(resolve => {
