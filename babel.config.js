@@ -14,6 +14,8 @@ module.exports = {
            "@assets": ["./src/assets"],
            "@theme": ["./src/theme"],
            "@config": ["./src/config"],
+           "@request": ["./src/request"],
+           "@store": ["./src/store"],
          }
        }
     ],

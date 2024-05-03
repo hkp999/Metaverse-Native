@@ -10,8 +10,9 @@
       "@styles/*": ["src/styles/*"],
       "@assets/*": ["src/assets/*"],
       "@theme/*": ["src/theme/*"],
-      "@config/*": ["src/config/*"]
-
+      "@config/*": ["src/config/*"],
+      "@request/*": ["src/request/*"],
+      "@store/*": ["src/store/*"]
     },
     "typeRoots": ["src/types"]
   },

@@ -2,16 +2,20 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
+import { AppRegistry } from 'react-native';
+import { TheContextProvider } from '@theme/index'
+import { Provider } from 'react-redux';
 import App from './App';
-import {TheContextProvider} from '@theme/index'
-import {name as appName} from './app.json';
+import { name as appName } from './app.json';
+import store from '@store/index';
 
 AppRegistry.registerComponent(appName, () => {
   const Root = () => (
-    <TheContextProvider>
-      <App />
-    </TheContextProvider>
+    <Provider store={store}>
+      <TheContextProvider>
+        <App />
+      </TheContextProvider>
+    </Provider>
   )
   return Root
 });
