@@ -4,7 +4,8 @@ import Animated,{FadeIn, SlideInLeft, SlideInRight} from 'react-native-reanimate
 import { useNavigation } from '@react-navigation/native'
 import ActiveButton from '@components/ActiveButton'
 import IconFont from '@components/IconFont'
-import { recommendData } from '@views/Home/Recommend/data'
+import recommendData from '@datas/data0.json'
+import { calculateTimeDifference } from '@utils/index'
 
 const styles = StyleSheet.create({
   container: {
@@ -57,13 +58,26 @@ const styles = StyleSheet.create({
   },
 })
 
+const imgs: { [key: string]: string } = {
+  '新浪VR': 'https://ts1.cn.mm.bing.net/th?id=ODLS.39ca9133-5308-46c0-b03f-ca800391a321&w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2',
+  '元力社': 'https://yuanlishe.cn/static/img/logonew1.png'
+}
 
 const MessageItem = ({ data, style }: {
-  data: typeof recommendData[number],
+  data: typeof recommendData[number] & {gender?: number},
   style?: ViewStyle
 }) => {
   const navigation = useNavigation<NavigatePage>()
   const [like, setLike] = useState(false)
+
+  const goDetail = () => {
+    navigation.navigate('Detail',{
+      data:{
+        ...data,
+        artical_content: JSON.parse(data.artical_content)
+      }
+    })
+  }
   return (
     <Animated.View style={[styles.container, style]} entering={FadeIn}>
       {/* 作者信息 && 关注 */}
@@ -72,35 +86,35 @@ const MessageItem = ({ data, style }: {
           <Image
             style={styles.image}
             source={{
-              uri: data.avatar
+              uri: imgs[data.user_id]
             }}
           />
           <View style={styles.authorMsg}>
-            <Text style={[globalStyles.largeSize, globalStyles.baseFont, globalStyles.baseBold]}>{data.author}&nbsp;<IconFont name={data.gender === 2 ? 'Woman' : 'Man'} size={10} /></Text>
-            <Text style={[globalStyles.smallSize, { color: '#bbb' }]}>{data.releaseTime}·{data.pageView}浏览</Text>
+            <Text style={[globalStyles.largeSize, globalStyles.baseFont, globalStyles.baseBold]}>{data.user_id}&nbsp;<IconFont name={data.gender === 2 ? 'Woman' : 'Man'} size={10} /></Text>
+            <Text style={[globalStyles.smallSize, { color: '#bbb' }]}>{calculateTimeDifference(data.artical_time)} / {data.artical_views_count}浏览</Text>
           </View>
 
         </View>
         <ActiveButton style={styles.button} textStyle={globalStyles.baseSize} activeText={{ color: '#ccc' }} />
       </Animated.View>
       {/* 文章简介 */}
-      <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
+      <TouchableOpacity onPress={goDetail}>
         <Animated.Text style={[styles.mainTitle, globalStyles.largeSize]} numberOfLines={4} entering={SlideInRight}>
-          {data.content}
+          {data.artical_intro}
         </Animated.Text>
       </TouchableOpacity>
       {/* 文章的标题 */}
-      <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
+      <TouchableOpacity onPress={goDetail}>
         <Animated.View style={[styles.linkView, globalStyles.baseLayout]} entering={SlideInLeft}>
           <Image
             style={styles.linkImg}
             source={{
-              uri: data.linkImg
+              uri: data.artical_imgUrl
             }}
           />
           <View style={{ flex: 1, marginLeft: 10 }}>
-            <Text style={[globalStyles.largeSize, globalStyles.baseFont]} numberOfLines={1}>{data.linkTitle}</Text>
-            <Text style={globalStyles.smallSize} numberOfLines={2}>{data.linkContent}</Text>
+            <Text style={[globalStyles.largeSize, globalStyles.baseFont]} numberOfLines={1}>{data.artical_title}</Text>
+            <Text style={globalStyles.smallSize} numberOfLines={2}>{data.artical_intro}</Text>
           </View>
         </Animated.View>
       </TouchableOpacity>
@@ -108,7 +122,7 @@ const MessageItem = ({ data, style }: {
       <Animated.View style={[globalStyles.baseLayout, { width: '100%', marginTop: 10 }]} entering={SlideInRight}>
         <View style={[globalStyles.baseLayout, { justifyContent: 'flex-start' }]}>
           <IconFont name='Circle' size={16} color='rgb(21,129,255)' />
-          <Text style={{ marginLeft: 2 }}>圈子：{data.category}</Text>
+          <Text style={{ marginLeft: 2 }}>圈子：{data.artical_type}</Text>
         </View>
         <View style={[globalStyles.baseLayout]}>
           <Pressable onPress={() => {
@@ -116,12 +130,12 @@ const MessageItem = ({ data, style }: {
           }}>
             <View style={[globalStyles.baseLayout, { marginRight: 10 }]}>
               <IconFont name={like ? 'LikeActive' : 'Like'} size={16} />
-              <Text style={{ marginLeft: 2 }}>{data.likes}</Text>
+              <Text style={{ marginLeft: 2 }}>{data.artical_like_count}</Text>
             </View>
           </Pressable>
           <View style={[globalStyles.baseLayout]}>
             <IconFont name='Comment' size={16} />
-            <Text style={{ marginLeft: 2 }}>{data.comments}</Text>
+            <Text style={{ marginLeft: 2 }}>{data.artical_comment_count}</Text>
           </View>
         </View>
       </Animated.View>

@@ -12,7 +12,10 @@
       "@theme/*": ["src/theme/*"],
       "@config/*": ["src/config/*"],
       "@request/*": ["src/request/*"],
-      "@store/*": ["src/store/*"]
+      "@store/*": ["src/store/*"],
+      "@datas/*": ["src/datas/*"],
+      "@utils/*": ["src/utils/*"]
+
     },
     "typeRoots": ["src/types"]
   },

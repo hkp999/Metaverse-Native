@@ -1,7 +1,9 @@
+import articalAction from './recArtical'
 import userAction from './user'
 
 const action = {
-  user: userAction
+  user: userAction,
+  recArtical: articalAction
 }
 
 export default action

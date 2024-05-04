@@ -2,6 +2,7 @@
 /node_modules
 /android
 /ios
+/src/datas
 ​
 # file 不需要提交的文件
 config.ini

@@ -16,6 +16,8 @@ module.exports = {
            "@config": ["./src/config"],
            "@request": ["./src/request"],
            "@store": ["./src/store"],
+           "@datas": ["./src/datas"],
+           "@utils": ["./src/utils"]
          }
        }
     ],

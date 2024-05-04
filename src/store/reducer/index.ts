@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import userReducer from './user';
+import articalAction from './recArtical'
+import userReducer from './user'
 
 const reducer = combineReducers({
-  user: userReducer
+  user: userReducer,
+  recArtical: articalAction
 })
 
 export default reducer

@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import { Text, View, StyleSheet, SafeAreaView, FlatList, ScrollView } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Text, View, StyleSheet, SafeAreaView, FlatList } from 'react-native'
 import Animated, { SlideInDown, SlideInUp } from 'react-native-reanimated'
 import SwiperComponent from '@components/SwiperComponent'
 import IconFont from '@components/IconFont'
 import MessageItem from '@components/MessageItem'
 import BottomLoading from '@components/BottomLoading'
-import { recommendData } from './data'
+import recommendData from '@datas/data0.json'
+import { delayLoading } from '@utils/index'
+import { connect } from 'react-redux'
 
 const styles = StyleSheet.create({
   Swiper: {
@@ -54,10 +56,22 @@ const HeaderComponent = () => {
     </>
   )
 }
-const Recommend = () => {
-  const [loading,setLoading] = useState(false)
-  const getMoreMsg = () => {
+const Recommend = ({ artical }: { artical: any[] }) => {
+  const [loading, setLoading] = useState(false)
+  const [artData, setArtData] = useState<any[]>([])
+  const [count, setCount] = useState(1)
+
+  useEffect(() => {
+    if (count > 0) {
+      setArtData([...artData, ...artical.slice((count - 1) * 5, count * 5)])
+      setLoading(false)
+    }
+  }, [count])
+
+  const getMoreMsg = async () => {
     setLoading(true)
+    await delayLoading(2000)
+    setCount(count + 1)
   }
 
   return (
@@ -65,7 +79,7 @@ const Recommend = () => {
       <FlatList
         style={{ backgroundColor: '#fff' }}
         renderItem={renderItem}
-        data={recommendData}
+        data={artData}
         ListHeaderComponent={HeaderComponent}
         ListFooterComponent={loading ? <BottomLoading title='正在前往元宇宙···' /> : <></>}
         onEndReached={getMoreMsg}
@@ -75,5 +89,11 @@ const Recommend = () => {
   )
 }
 
-export default Recommend
+const mapStateToProps = (state: any) => {
+  return {
+    artical: state.recArtical,
+  }
+};
+
+export default connect(mapStateToProps)(Recommend)
 

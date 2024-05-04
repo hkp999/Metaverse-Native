@@ -1,12 +1,11 @@
 import React from 'react'
 import { ScrollView, Text, Image, StyleSheet } from 'react-native'
-import Data from '@views/Detail/data'
+import type dataType from '@datas/data0.json'
 
 const styles = StyleSheet.create({
   baseText: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#333',
-    marginHorizontal: 10
   },
   baseImg: {
     maxWidth: baseInfo.baseWidth - 100,
@@ -15,13 +14,28 @@ const styles = StyleSheet.create({
   }
 })
 
-const DetailComponent = ({ data }: {
-  data: typeof Data
+const DetailComponent = (props: typeof dataType[number] & {
+  artical_content: {
+    text: string;
+    src: string;
+  }[]
 }) => {
   return (
-    <ScrollView>
+    <ScrollView style={{
+      marginHorizontal: 20,
+      paddingTop: 20
+    }}>
+      <Text style={{
+        fontSize: 24,
+        color: '#000'
+      }}>{props.artical_title}</Text>
+      <Text>来源：{props.user_id} · {props.artical_time}</Text>
+      <Text style={{
+        marginTop: 20,
+        fontSize: 16
+      }}><Text style={{ color: '#000' }}>简介：</Text>{props.artical_intro}</Text>
       {
-        data.map((item, index) => {
+        props.artical_content.map((item, index) => {
           return <React.Fragment key={index}>
             {
               item.src
