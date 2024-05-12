@@ -56,21 +56,21 @@ const HeaderComponent = () => {
     </>
   )
 }
-const Recommend = ({ artical }: { artical: any[] }) => {
+const Recommend = () => {
   const [loading, setLoading] = useState(false)
   const [artData, setArtData] = useState<any[]>([])
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState(0)
 
   useEffect(() => {
     if (count > 0) {
-      setArtData([...artData, ...artical.slice((count - 1) * 5, count * 5)])
+      setArtData([...artData, ...recommendData.slice((count - 1) * 5, count * 5)])
       setLoading(false)
     }
   }, [count])
 
   const getMoreMsg = async () => {
     setLoading(true)
-    await delayLoading(2000)
+    await delayLoading(1000)
     setCount(count + 1)
   }
 
@@ -83,17 +83,11 @@ const Recommend = ({ artical }: { artical: any[] }) => {
         ListHeaderComponent={HeaderComponent}
         ListFooterComponent={loading ? <BottomLoading title='正在前往元宇宙···' /> : <></>}
         onEndReached={getMoreMsg}
-        onEndReachedThreshold={0.1}
+        onEndReachedThreshold={0.9}
       />
     </SafeAreaView>
   )
 }
 
-const mapStateToProps = (state: any) => {
-  return {
-    artical: state.recArtical,
-  }
-};
-
-export default connect(mapStateToProps)(Recommend)
+export default connect()(Recommend)
 

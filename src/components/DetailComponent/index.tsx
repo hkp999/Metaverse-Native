@@ -22,7 +22,7 @@ const DetailComponent = (props: typeof dataType[number] & {
 }) => {
   return (
     <ScrollView style={{
-      marginHorizontal: 20,
+      paddingHorizontal: 20,
       paddingTop: 20
     }}>
       <Text style={{

@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import DetailComponent from '@components/DetailComponent'
+import DetailDomain from '@components/DetailDomain'
 import type dataType from '@datas/data0.json'
 
 const Detail = () => {
   const route = useRoute()
   const navigation = useNavigation()
-  const { data }:{data: typeof dataType[number]} = route.params
+  const { data }: { data: typeof dataType[number] } = route.params
 
   useEffect(() => {
     navigation.setOptions({
@@ -15,7 +16,10 @@ const Detail = () => {
   }, [])
 
   return (
-    <DetailComponent {...data} />
+    <>
+      <DetailComponent {...data} />
+      <DetailDomain data={data } />
+    </>
   )
 }
 

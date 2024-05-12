@@ -1,7 +1,6 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import Concern from '@views/Home/Concern'
 import Recommend from '@views/Home/Recommend'
 import Information from '@views/Home/Information'
 import News from '@views/Home/News'
@@ -23,7 +22,6 @@ export default function TableBarTop() {
         lazyPlaceholder: () => <View style={{flex: 1,justifyContent:'center',alignItems: 'center'}}><BottomLoading title='正在前往元宇宙···' /></View>
       })}
     >
-      <TopTab.Screen name='关注' component={Concern}></TopTab.Screen>
       <TopTab.Screen name='推荐' component={Recommend}></TopTab.Screen>
       <TopTab.Screen name='资讯' component={Information}></TopTab.Screen>
       <TopTab.Screen name='快讯' component={News}></TopTab.Screen>

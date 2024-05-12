@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, PermissionsAndroid, Platform } from 'react-native';
+import { Image } from 'react-native';
 import Authority from '@config/authority';
 
 import {
@@ -7,34 +7,28 @@ import {
   Input,
 } from '@rneui/themed';
 import ImagePicker from 'react-native-image-crop-picker';
+import { connect } from 'react-redux';
+import action from '@store/action';
 
 
 
-const DialogAgain = ({ isVisible, setIsVisble, dialogTitle }: {
+const DialogAgain = ({ isVisible, setIsVisble, dialogTitle, updateUserInfo }: {
   isVisible: boolean,
   dialogTitle: {
     name: string,
     text: string | undefined,
   },
   setIsVisble: Function,
+  updateUserInfo: Function
 }) => {
   const [str, setStr] = useState('')
   const [url, setUrl] = useState('')
 
-  const successFunc = () => {
-    ImagePicker.openCamera({
-      width: 300,
-      height: 400,
-      cropping: true
-    }).then(({path}) => {
-      console.log(path);
-      setUrl(path)
-    });
-  }
-
   const handleOk = () => {
+    let obj:any = {}
+    obj[dialogTitle.name] = str
 
-    Authority.requestCameraPermission(successFunc,() => {})
+    updateUserInfo(obj)
 
     setIsVisble(false)
   }
@@ -61,5 +55,9 @@ const DialogAgain = ({ isVisible, setIsVisble, dialogTitle }: {
   )
 }
 
-export default DialogAgain
+const mapDispatchToProps = {
+  updateUserInfo: action.nowUser.updateUserInfo
+};
+
+export default connect(null, mapDispatchToProps)(DialogAgain)
 

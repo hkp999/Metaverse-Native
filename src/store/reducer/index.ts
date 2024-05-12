@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux'
-import articalAction from './recArtical'
+// import articalReducer from './recArtical'
 import userReducer from './user'
+import publishReducer from './publish'
+import nowUserReducer from './nowUser'
 
 const reducer = combineReducers({
   user: userReducer,
-  recArtical: articalAction
+  // recArtical: articalReducer,
+  publish: publishReducer,
+  nowUser: nowUserReducer
 })
 
 export default reducer

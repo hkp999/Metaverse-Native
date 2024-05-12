@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import IconFont from '@components/IconFont'
+import { useNavigation } from '@react-navigation/native'
 
 const data = [
   {
@@ -41,12 +42,22 @@ const styles = StyleSheet.create({
 })
 
 const PersonalDomain = () => {
+  const navigation = useNavigation<NavigatePage>()
+
+  const handleItem = (name: string) => {
+    if(name === '快速发布') {
+      navigation.navigate('Publish')
+    }else if(name === '我的动态'){
+      navigation.navigate('Dynamic')
+    }
+  }
+
   return (
     <View style={styles.mainView}>
       {
         data.map((item) => {
           return (
-            <TouchableOpacity key={item.imgUrl} style={[globalStyles.baseShadow, styles.itemView]} activeOpacity={0.7}>
+            <TouchableOpacity key={item.imgUrl} style={[globalStyles.baseShadow, styles.itemView]} activeOpacity={0.7} onPress={() => handleItem(item.name)}>
               <IconFont name={item.imgUrl} size={30} />
               <Text style={[globalStyles.smallSize, globalStyles.baseFont,{marginVertical: 2}]}>{item.name}</Text>
               <Text style={[globalStyles.smallSize]}>{item.desc}</Text>

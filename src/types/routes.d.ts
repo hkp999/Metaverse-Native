@@ -22,7 +22,9 @@ declare global {
     },
     Collect: undefined,
     Login: undefined,
-    Infor: undefined
+    Infor: undefined,
+    Publish: undefined,
+    Dynamic: undefined
   }
 
   type TopicDetailsProp = NativeStackScreenProps<RootStackParamList, 'TopicDetails'>

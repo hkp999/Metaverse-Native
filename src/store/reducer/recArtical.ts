@@ -9,5 +9,8 @@ type Action = {
 
 export default function articalReducer(state = initData, action: Action) {
 
-  return state
+  switch (action.type) {
+    default:
+      return state;
+  }
 }

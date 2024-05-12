@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import Timeline, { Data } from 'react-native-timeline-flatlist'
+import BottomLoading from '@components/BottomLoading'
+import { delayLoading } from '@utils/index'
 import data from './data'
 
 type ExpandData = {
@@ -36,21 +38,44 @@ function renderDetail(rowData: Data & ExpandData, sectionID: number, rowID: numb
 }
 
 const TimeLine = () => {
+  const [loading, setLoading] = useState(false)
+  const [artData, setArtData] = useState<any[]>([])
+  const [count, setCount] = useState(1)
+
+  useEffect(() => {
+    if (count > 0) {
+      setArtData([...artData, ...data.slice((count - 1) * 2, count * 2)])
+      setLoading(false)
+    }
+  }, [count])
+
+  const getMore = async () => {
+    setLoading(true)
+    await delayLoading(1000)
+    setCount(count + 1)
+  }
+
   return (
-    <Timeline
-      data={data}
-      renderDetail={renderDetail}
-      lineWidth={1}
-      lineColor='#f1f1f1'
-      showTime={false}
-      innerCircle='icon'
-      listViewStyle={{
-        paddingVertical: 20
-      }}
-      circleColor='#fff'
-      renderFullLine={true}
-      isUsingFlatlist={true}
-    />
+    <>
+      <Timeline
+        data={artData}
+        renderDetail={renderDetail}
+        lineWidth={1}
+        lineColor='#f1f1f1'
+        showTime={false}
+        innerCircle='icon'
+        listViewStyle={{
+          paddingVertical: 20
+        }}
+        circleColor='#fff'
+        renderFullLine={true}
+        isUsingFlatlist={true}
+        options={{
+          onEndReached: getMore
+        }}
+      />
+      {loading && <BottomLoading title='正在前往元宇宙···' />}
+    </>
   )
 }
 

@@ -1,3 +1,10 @@
 export const LOGIN = "LOGIN"
 export const REGISTER = "REGISTER"
+export const ADD_ARTICAL = "ADD_ARTICAL"
+export const UPDATE_USERINFO = "UPDATE_USERINFO"
+export const ADD_OWN_ARTICAL = "ADD_OWN_ARTICAL"
+export const ADD_OWN_COLLECT = "ADD_OWN_COLLECT"
+export const DELETE_OWN_COLLECT = "DELETE_OWN_COLLECT"
+
+
 

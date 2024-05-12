@@ -2,6 +2,8 @@ import React from 'react'
 import { View, StyleSheet, Text, Image, TouchableHighlight } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import IconFont from '@components/IconFont'
+import { connect } from 'react-redux'
+import { UserInfo } from '@store/reducer/user'
 
 const styles = StyleSheet.create({
   mainView: {
@@ -67,27 +69,35 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   }
 })
-const data = [
-  {
-    name: '动态',
-    count: 64
-  },
-  {
-    name: '粉丝',
-    count: 25
-  },
-  {
-    name: '关注',
-    count: 1000
-  },
-  {
-    name: '积分',
-    count: 2
-  },
-]
-const PersonalHeader = () => {
+
+const PersonalHeader = ({userInfo}: {
+  userInfo: UserInfo
+}) => {
 
   const navigation = useNavigation<NavigatePage>()
+  const data = [
+    {
+      key: 'dynamic_count',
+      name: '动态',
+      count: userInfo.dynamic_count
+    },
+    {
+      key: 'fan_count',
+      name: '粉丝',
+      count: userInfo.fan_count
+    },
+    {
+      key: 'follow_count',
+      name: '关注',
+      count: userInfo.follow_count
+    },
+    {
+      key: 'points',
+      name: '积分',
+      count: userInfo.points
+    },
+  ]
+
   const handleShowSheel = () => {
     navigation.navigate('Infor')
   }
@@ -101,18 +111,18 @@ const PersonalHeader = () => {
           <Image
             style={styles.img}
             source={{
-              uri: 'https://avatars.githubusercontent.com/u/810438?s=80&v=4'
+              uri: userInfo.avator
             }}
           />
         </View>
         {/* 信息部分 */}
         <View style={styles.contenView}>
           <View style={globalStyles.baseLayout}>
-            <Text style={styles.nickText} numberOfLines={1}>gaearon</Text>
-            <Text>元龄：3个月</Text>
+            <Text style={styles.nickText} numberOfLines={1}>{userInfo.username}</Text>
+            <Text>元龄：{userInfo.mAge}</Text>
           </View>
           <View style={globalStyles.baseLayout}>
-            <Text style={styles.contentText} numberOfLines={1}>很高心能认识你！希望以后能和你共同工作！！！</Text>
+            <Text style={styles.contentText} numberOfLines={1}>{userInfo.text}</Text>
             <TouchableHighlight style={styles.iconView}  onPress={handleShowSheel} activeOpacity={0.2} underlayColor="#f5f5f5">
                 <Text style={styles.iconText}><IconFont name="Edit" size={10}></IconFont> 完善资料</Text>
             </TouchableHighlight>
@@ -136,4 +146,10 @@ const PersonalHeader = () => {
   )
 }
 
-export default PersonalHeader
+const mapStateToProps = (state: any) => {
+  return {
+    userInfo: state.nowUser
+  }
+};
+
+export default connect(mapStateToProps)(PersonalHeader)

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { BottomSheet } from '@rneui/base';
 import PersonalHeader from './PersonalHeader'
 import PersonalDomain from './PersonalDomain'
 import PersonalFooter from './PersonalFooter'

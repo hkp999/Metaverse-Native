@@ -11,6 +11,8 @@ import TopicDetails from '@views/TopicDetails';
 import Collect from '@views/Personal/PersonalFooter/Collect';
 import Login from '@views/Login';
 import Infor from '@views/Personal/PersonalHeader/Infor';
+import Publish from '@views/Publish'
+import Dynamic from '@views/Dynamic'
 
 function EmptyScreen() {
   return <View />;
@@ -31,6 +33,8 @@ export default function App() {
               <Stack.Screen name="User" component={EmptyScreen} />
               <Stack.Screen name="Collect" component={Collect} />
               <Stack.Screen name="Infor" component={Infor} />
+              <Stack.Screen name="Publish" component={Publish} />
+              <Stack.Screen name="Dynamic" component={Dynamic} />
             </>
         }
       </Stack.Navigator>

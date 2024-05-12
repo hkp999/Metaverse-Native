@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 })
 
 const errorMsg = ['', '账户或密码输入错误', '请完善相关账户信息', '请完善相关协议', '两次密码不一致', '用户已存在']
-const Login: React.FC<ScreenProps<'Login'> & { users: { username: string, password: string }[], register: Function }> = ({ navigation, users, register }) => {
+const Login: React.FC<ScreenProps<'Login'> & { users: { username: string, password: string }[], register: Function, userLogin: Function }> = ({ navigation, users, register, userLogin }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [sPassword, setSPassword] = useState('')
@@ -68,6 +68,11 @@ const Login: React.FC<ScreenProps<'Login'> & { users: { username: string, passwo
       return item['username'] === username && item['password'] === password
     })
     if (!login) return setError(errorMsg[1])
+
+    const userInfo = users.find(item => {
+      return item['username'] === username && item['password'] === password
+    })
+    userLogin({...userInfo, artical: [], collect: []})
     navigation.navigate('Home')
   }
 
@@ -158,6 +163,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = {
   register: action.user.regisUser,
+  userLogin: action.nowUser.userLogin
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
