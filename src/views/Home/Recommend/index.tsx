@@ -5,9 +5,7 @@ import SwiperComponent from '@components/SwiperComponent'
 import IconFont from '@components/IconFont'
 import MessageItem from '@components/MessageItem'
 import BottomLoading from '@components/BottomLoading'
-import recommendData from '@datas/data0.json'
-import { delayLoading } from '@utils/index'
-import { connect } from 'react-redux'
+import { getArtical } from '@request/index'
 
 const styles = StyleSheet.create({
   Swiper: {
@@ -33,7 +31,20 @@ const styles = StyleSheet.create({
   },
 })
 
-const renderItem = ({ item }: { item: typeof recommendData[number], index: number }) => {
+export interface RecommendData {
+  "artical_intro": string,
+  "artical_type": string,
+  "artical_title": string,
+  "artical_content": string,
+  "artical_time": string,
+  "user_id": string,
+  "artical_comment_count": number,
+  "artical_like_count": number,
+  "artical_views_count": number,
+  "artical_imgUrl": string
+}
+
+const renderItem = ({ item }: { item: RecommendData, index: number }) => {
   return <MessageItem data={item} />
 }
 
@@ -59,19 +70,21 @@ const HeaderComponent = () => {
 const Recommend = () => {
   const [loading, setLoading] = useState(false)
   const [artData, setArtData] = useState<any[]>([])
-  const [count, setCount] = useState(0)
+  const [pageInfo, setPageInfo] = useState({ page: 0, pageSize: 5, count: 0 })
 
   useEffect(() => {
-    if (count > 0) {
-      setArtData([...artData, ...recommendData.slice((count - 1) * 5, count * 5)])
-      setLoading(false)
-    }
-  }, [count])
+    if (!loading) return
 
-  const getMoreMsg = async () => {
+    (async () => {
+      const { data } = await getArtical(pageInfo)
+      setArtData([...artData, ...data.data])
+      setLoading(false)
+    })()
+  }, [loading])
+
+  const getMoreMsg = () => {
+    setPageInfo({ ...pageInfo, page: pageInfo.page + 1 })
     setLoading(true)
-    await delayLoading(1000)
-    setCount(count + 1)
   }
 
   return (
@@ -80,6 +93,7 @@ const Recommend = () => {
         style={{ backgroundColor: '#fff' }}
         renderItem={renderItem}
         data={artData}
+        keyExtractor={(item) => item.artical_title}
         ListHeaderComponent={HeaderComponent}
         ListFooterComponent={loading ? <BottomLoading title='正在前往元宇宙···' /> : <></>}
         onEndReached={getMoreMsg}
@@ -89,5 +103,5 @@ const Recommend = () => {
   )
 }
 
-export default connect()(Recommend)
+export default Recommend
 

@@ -1,5 +1,10 @@
-import React from 'react'
+import { useNavigation } from '@react-navigation/native'
+import action from '@store/action'
+import { UserInfo } from '@store/reducer/user'
+import React, { useEffect, useMemo, useState } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
+import { connect } from 'react-redux'
+import { calculateTimeDifference } from '@utils/index'
 
 const styles = StyleSheet.create({
   itemView: {
@@ -43,17 +48,36 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4
   }
 })
-const RenderItem = ({data}: {
-  data: any
+const RenderItem = ({ data, userMsg }: {
+  data: {
+    item: UserInfo
+  },
+  userMsg: {
+    username: string,
+    message: string,
+    time: string,
+  }[]
 }) => {
+  const navigation = useNavigation<NavigatePage>()
+  const [msg, setMsg] = useState([])
+  const handleMessage = () => {
+    navigation.navigate('DetailMsg', data)
+  }
+
+  useEffect(() => {
+    setMsg(userMsg[data.item.username])
+    console.log(data.item.username);
+
+  }, [])
+
   return (
-    <TouchableOpacity style={styles.itemView} activeOpacity={1}>
+    <TouchableOpacity onPress={handleMessage} style={styles.itemView} activeOpacity={1}>
       {/* 头像 */}
       <View>
         <Image
           style={styles.img}
           source={{
-            uri: data.item.url
+            uri: data.item.avator
           }}
         />
       </View>
@@ -61,12 +85,12 @@ const RenderItem = ({data}: {
       <View style={styles.contenView}>
         <View style={globalStyles.baseLayout}>
           <Text style={styles.nickText} numberOfLines={1}>{data.item.username}</Text>
-          <Text>{data.item.datatime}</Text>
+          <Text>{calculateTimeDifference(msg[msg?.length - 1]?.time)}</Text>
         </View>
         <View style={globalStyles.baseLayout}>
-          <Text style={styles.contentText} numberOfLines={1}>{data.item.text}</Text>
+          <Text style={styles.contentText} numberOfLines={1}>{msg[msg?.length - 1]?.message}</Text>
           <View style={styles.iconView}>
-            <Text style={styles.iconText}>{data.item.msg_number}</Text>
+            <Text style={styles.iconText}>{msg?.length}</Text>
           </View>
         </View>
       </View>
@@ -74,4 +98,16 @@ const RenderItem = ({data}: {
   )
 }
 
-export default RenderItem
+const mapStateToProps = (state: any) => {
+  return {
+    users: state.user,
+    userMsg: state.userMsg
+  }
+};
+
+const mapDispatchToProps = {
+  register: action.user.regisUser,
+  userLogin: action.nowUser.userLogin
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RenderItem)

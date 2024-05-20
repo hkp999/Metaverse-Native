@@ -24,7 +24,8 @@ declare global {
     Login: undefined,
     Infor: undefined,
     Publish: undefined,
-    Dynamic: undefined
+    Dynamic: undefined,
+    DetailMsg: undefined
   }
 
   type TopicDetailsProp = NativeStackScreenProps<RootStackParamList, 'TopicDetails'>

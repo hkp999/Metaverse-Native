@@ -9,5 +9,6 @@ export default {
   Circle: require('./circle.png'),
   Time: require('./time.png'),
   Article: require('./article.png'),
-  ArrowRight: require('./arrowRight.png')
+  ArrowRight: require('./arrowRight.png'),
+  Meta: require('./meta.png')
 }

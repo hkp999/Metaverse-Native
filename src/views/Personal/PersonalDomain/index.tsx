@@ -10,19 +10,9 @@ const data = [
     desc: '详细、多样'
   },
   {
-    name: '我的主页',
-    imgUrl: 'PHome',
-    desc: '精美、定制'
-  },
-  {
     name: '快速发布',
     imgUrl: 'PPublish',
     desc: '简洁、迅速'
-  },
-  {
-    name: '扩展圈子',
-    imgUrl: 'PCircle',
-    desc: '充实、学习'
   },
 ] as const
 
@@ -34,8 +24,9 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   itemView: {
-    height: 100,
-    width: baseInfo.baseWidth / 4 - 15,
+    height: 90,
+    width: baseInfo.baseWidth / 2 - 15,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   }
@@ -45,9 +36,9 @@ const PersonalDomain = () => {
   const navigation = useNavigation<NavigatePage>()
 
   const handleItem = (name: string) => {
-    if(name === '快速发布') {
+    if (name === '快速发布') {
       navigation.navigate('Publish')
-    }else if(name === '我的动态'){
+    } else if (name === '我的动态') {
       navigation.navigate('Dynamic')
     }
   }
@@ -58,9 +49,13 @@ const PersonalDomain = () => {
         data.map((item) => {
           return (
             <TouchableOpacity key={item.imgUrl} style={[globalStyles.baseShadow, styles.itemView]} activeOpacity={0.7} onPress={() => handleItem(item.name)}>
-              <IconFont name={item.imgUrl} size={30} />
-              <Text style={[globalStyles.smallSize, globalStyles.baseFont,{marginVertical: 2}]}>{item.name}</Text>
-              <Text style={[globalStyles.smallSize]}>{item.desc}</Text>
+              <IconFont name={item.imgUrl} size={40} />
+              <View style={{
+                marginLeft: 5
+              }}>
+                <Text style={[globalStyles.smallSize, globalStyles.baseFont, { marginVertical: 2 }]}>{item.name}</Text>
+                <Text style={[globalStyles.smallSize]}>{item.desc}</Text>
+              </View>
             </TouchableOpacity>
           )
         })

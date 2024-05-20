@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 const Message = () => {
   return (
     <View style={styles.messageView}>
-      {/* <Domain /> */}
+      <Domain />
       <UserMsg />
     </View>
   )

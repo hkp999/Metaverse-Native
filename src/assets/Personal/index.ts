@@ -9,4 +9,5 @@ export default {
   Set: require('./set.png'),
   About: require('./about.png'),
   Quit: require('./quit.png'),
+  Delete: require('./delete.png')
 }

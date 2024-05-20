@@ -1,11 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
 import React, { useEffect } from 'react'
-import { Text, ScrollView } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import DynamicItem from '@components/DynamicItem'
 import { UserInfo } from '@views/Publish'
+import NullData from '@components/NullData'
 
-const Dynamic = ({ nowUser:{artical} }: {
+const Dynamic = ({ nowUser: { artical } }: {
   nowUser: {
     artical: UserInfo[]
   }
@@ -19,11 +20,20 @@ const Dynamic = ({ nowUser:{artical} }: {
   }, [])
 
   return (
-    <ScrollView>
+    <>
       {
-        artical.map((item, index) => <DynamicItem key={index} {...item} />)
+        artical.length ?
+          <ScrollView>
+            {
+              artical.map((item, index) => <DynamicItem key={index} {...item} />)
+            }
+          </ScrollView>
+          : <View style={{ flex: 1, justifyContent: 'center' }}>
+            <NullData />
+          </View>
       }
-    </ScrollView>
+    </>
+
   )
 }
 

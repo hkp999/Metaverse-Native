@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { CheckBox, Input, Button } from '@rneui/base'
-import { connect } from 'react-redux'
-import action from '@store/action'
+import Toast from 'react-native-toast-message'
+import { setGenericPassword } from 'react-native-keychain'
+import { login, register } from '@request/index'
 
 const styles = StyleSheet.create({
   containerView: {
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
 })
 
 const errorMsg = ['', '账户或密码输入错误', '请完善相关账户信息', '请完善相关协议', '两次密码不一致', '用户已存在']
-const Login: React.FC<ScreenProps<'Login'> & { users: { username: string, password: string }[], register: Function, userLogin: Function }> = ({ navigation, users, register, userLogin }) => {
+const Login: React.FC<ScreenProps<'Login'>> = ({ navigation }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [sPassword, setSPassword] = useState('')
@@ -60,37 +61,52 @@ const Login: React.FC<ScreenProps<'Login'> & { users: { username: string, passwo
   const [pro, setPro] = useState(false)
 
   // 用户登录
-  const goHome = () => {
+  const goHome = async () => {
     // 判断是否具有账户密码
     if (!username || !password) return setError(errorMsg[2])
     if (!pro) return setError(errorMsg[3])
-    const login = users.some(item => {
-      return item['username'] === username && item['password'] === password
-    })
-    if (!login) return setError(errorMsg[1])
 
-    const userInfo = users.find(item => {
-      return item['username'] === username && item['password'] === password
-    })
-    userLogin({...userInfo, artical: [], collect: []})
-    navigation.navigate('Home')
+    try {
+      const { data } = await login({ username, password })
+
+      if (data.code === 200) {
+        Toast.show({
+          type: 'success',
+          text1: '登录成功',
+        })
+
+        await setGenericPassword('metaToken', data.token)
+        navigation.navigate('Home')
+      } else if (data.code === 400) {
+        Toast.show({
+          type: 'error',
+          text1: '登录失败',
+        })
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // 用户注册
-  const goRegister = () => {
+  const goRegister = async () => {
     if (!username || !password || !sPassword) return setError(errorMsg[2])
     if (sPassword !== password) return setError(errorMsg[4])
 
-    const login = users.some(item => {
-      return item['username'] === username && item['password'] === password
-    })
-    if (login) return setError(errorMsg[5])
     // 注册成功，将用户信息存入
-    register({
-      username,
-      password
-    })
-    setIsLogin(!isLogin)
+    const { data } = await register({ username, password })
+    if (data.code === 200) {
+      Toast.show({
+        type: 'success',
+        text1: data.message,
+      })
+      setIsLogin(!isLogin)
+    } else if (data.code === 400) {
+      Toast.show({
+        type: 'error',
+        text1: data.message,
+      })
+    }
   }
 
   const changeValue = (value: any, type: string) => {
@@ -155,16 +171,7 @@ const Login: React.FC<ScreenProps<'Login'> & { users: { username: string, passwo
   )
 }
 
-const mapStateToProps = (state: any) => {
-  return {
-    users: state.user,
-  }
-};
 
-const mapDispatchToProps = {
-  register: action.user.regisUser,
-  userLogin: action.nowUser.userLogin
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login
 

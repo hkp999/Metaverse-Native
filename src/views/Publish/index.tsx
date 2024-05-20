@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from 'react'
-import { View, TextInput, Button, Image, ScrollView,Alert, TouchableOpacity } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, TextInput, Button, Image, ScrollView, Alert, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import ImagePicker from 'react-native-image-crop-picker'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import action from '@store/action'
 import { formatCurrentDateTime } from '@utils/index'
 
@@ -16,22 +16,23 @@ export type UserInfo = {
   create_time: string;
 };
 
-const Publish = ({userInfo, addArtical,addOwnArtical}:{
+const Publish = ({ userInfo, addArtical, addOwnArtical, addDynamicCount }: {
   userInfo: UserInfo,
   addOwnArtical: Function,
-  addArtical: Function
+  addArtical: Function,
+  addDynamicCount: Function
 }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [content, setContent] = useState('');
-  const [selectedImages, setSelectedImages] = useState<{uri: string}[]>([]);
+  const [selectedImages, setSelectedImages] = useState<{ uri: string }[]>([]);
   const navigation = useNavigation<NavigatePage>()
 
   const MAX_IMAGES = 9; // 最大上传数量
 
   useEffect(() => {
     navigation.setOptions({
-      title: '文章发布'
+      title: '动态发布'
     });
   }, [])
 
@@ -40,7 +41,7 @@ const Publish = ({userInfo, addArtical,addOwnArtical}:{
       multiple: true,
       cropping: true
     }).then(images => {
-      if(images.length > MAX_IMAGES) {
+      if (images.length > MAX_IMAGES) {
         Alert.alert('提示', `最多只能上传${MAX_IMAGES}张图片`);
         return;
       }
@@ -70,6 +71,7 @@ const Publish = ({userInfo, addArtical,addOwnArtical}:{
     }
     addArtical(artical)
     addOwnArtical(artical)
+    addDynamicCount()
     Alert.alert('提示', '提交成功')
     navigation.goBack()
   }
@@ -100,7 +102,7 @@ const Publish = ({userInfo, addArtical,addOwnArtical}:{
       }} horizontal={true}>
         {selectedImages.map((image, index) => (
           <TouchableOpacity key={index} onPress={() => deleteImage(index)}>
-            <Image  source={image} style={{ width: 100, height: 100, marginRight: 10 }} />
+            <Image source={image} style={{ width: 100, height: 100, marginRight: 10 }} />
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -121,7 +123,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = {
   addArtical: action.publish.addArtical,
-  addOwnArtical: action.nowUser.addOwnArtical
+  addOwnArtical: action.nowUser.addOwnArtical,
+  addDynamicCount: action.nowUser.addDynamicCount
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Publish)

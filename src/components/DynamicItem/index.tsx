@@ -4,6 +4,8 @@ import { Image } from '@rneui/base'
 import IconFont from '@components/IconFont'
 import { UserInfo } from '@views/Publish'
 import { calculateTimeDifference } from '@utils/index'
+import { connect } from 'react-redux'
+import action from '@store/action'
 
 const styles = StyleSheet.create({
   mainView: {
@@ -27,9 +29,13 @@ const styles = StyleSheet.create({
   }
 })
 
-const index = (props: UserInfo) => {
+const index = (props: UserInfo & {deleteDynamicCount: Function,deleteOwnArtical:Function, nowUser: UserInfo}) => {
   const [like, setLike] = useState(false)
 
+  const handleDelete = () => {
+    props.deleteDynamicCount()
+    props.deleteOwnArtical({content: props.content})
+  }
   return (
     <View style={styles.mainView}>
       <View style={{
@@ -53,9 +59,7 @@ const index = (props: UserInfo) => {
 
         }}>
           {
-            props.images.map((item, index) => <Image key={index} style={styles.img} resizeMode="contain" source={{
-              uri: 'https://avatars.githubusercontent.com/u/107165304?v=4'
-            }} />)
+            props.images?.map((item: {}, index) => <Image key={index} style={styles.img} resizeMode="contain" source={item} />)
           }
         </View>
         <View style={{
@@ -64,15 +68,39 @@ const index = (props: UserInfo) => {
           paddingVertical: 10
         }}>
           <Text>{calculateTimeDifference(props.create_time)}</Text>
-          <Pressable onPress={() => {
-            setLike(!like)
+          <View style={{
+            flexDirection: 'row'
           }}>
-            <IconFont name={like ? 'LikeActive' : 'Like'} size={16} />
-          </Pressable>
+            {
+              props.username === props.nowUser.username && <Pressable style={{
+                marginRight: 15
+              }} onPress={handleDelete}>
+                <IconFont name='Delete' size={16} />
+              </Pressable>
+            }
+            <Pressable onPress={() => {
+              setLike(!like)
+            }}>
+              <IconFont name={like ? 'LikeActive' : 'Like'} size={16} />
+            </Pressable>
+          </View>
         </View>
       </View>
     </View>
   )
 }
 
-export default index
+const mapStateToProps = (state: any) => {
+  return {
+    nowUser: state.nowUser,
+  }
+};
+
+
+const mapDispatchToProps = {
+  deleteDynamicCount: action.nowUser.deleteDynamicCount,
+  deleteOwnArtical: action.nowUser.deleteOwnArtical,
+};
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(index)

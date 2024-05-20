@@ -1,36 +1,41 @@
-import React, { useContext } from 'react'
-import { View, Text, Image, StyleSheet, StatusBar, TouchableOpacity } from 'react-native'
+import React, { useContext, useState } from 'react'
+import { View, Image, StyleSheet, StatusBar, TextInput } from 'react-native'
 import IconFont from '@components/IconFont'
 import TableBarTop from '@components/TableBarTop'
 import { ThemeContext } from '@theme/index'
+import { Icon } from '@assets/index'
+import SearchView from './SearchView'
 
 const styles = StyleSheet.create({
   inputView: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10
+    marginTop: 10,
+    elevation: 20,
+    shadowColor: '#fff',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    paddingBottom: 10
   },
   logo: {
     width: 50,
     height: 50,
-    marginHorizontal: 10
-  },
-  oninput: {
-    width: '60%'
+    marginHorizontal: 20,
+    borderRadius: 5
   },
   input: {
-    width: '100%',
+    width: '70%',
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
     backgroundColor: '#f2f2f2',
     borderRadius: 9999,
-    height: 40,
   },
   inputText: {
-    fontSize: 16,
-    lineHeight: 32,
-    marginLeft: 5
+    width: '70%',
+    paddingLeft: 10,
+    borderBottomWidth: 0,
   },
   statusStyle: {
     color: '#000'
@@ -42,8 +47,10 @@ const styles = StyleSheet.create({
   }
 })
 
-const Home: React.FC<ScreenProps<'Home'>> = ({ navigation }) => {
+const Home: React.FC<ScreenProps<'Home'>> = () => {
   const { theme } = useContext(ThemeContext)
+  const [keyword, setKeyWord] = useState('')
+
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       {/* 状态栏 */}
@@ -52,19 +59,21 @@ const Home: React.FC<ScreenProps<'Home'>> = ({ navigation }) => {
       <View style={styles.inputView}>
         <Image
           style={styles.logo}
-          source={{
-            uri: 'https://vitejs.dev/logo-with-shadow.png'
-          }}
+          source={Icon['Meta']}
         />
-        <TouchableOpacity style={styles.oninput} onPress={() => navigation.navigate('Detail')}>
-          <View style={styles.input}>
-            <IconFont name="Search" size={20} />
-            <Text style={styles.inputText}>请输入关键字</Text>
-          </View>
-        </TouchableOpacity>
+        <View style={styles.input}>
+          <IconFont name="Search" size={20} />
+          <TextInput value={keyword} onChangeText={value => setKeyWord(value)} style={styles.inputText} />
+        </View>
       </View>
       {/* 顶部选项卡 */}
-      <TableBarTop />
+      {
+        keyword ?
+          <SearchView keyword={keyword} />
+          :
+          <TableBarTop />
+      }
+
     </View>
   )
 }

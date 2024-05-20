@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { SafeAreaView, FlatList } from 'react-native'
-import { delayLoading } from '@utils/index'
+import { getArtical } from '@request/index'
 import BottomLoading from '@components/BottomLoading'
-import data from '@datas/data1.json'
 import InforItem from './InforItem'
+import type { RecommendData } from '@views/Home/Recommend'
 
 const renderItem = ({ item, index }: {
-  item: typeof data[number],
+  item: RecommendData,
   index: number,
 }) => {
   return <InforItem item={item} index={index} />
@@ -15,20 +15,30 @@ const renderItem = ({ item, index }: {
 const News: React.FC<ScreenProps<'News'>> = () => {
   const [loading, setLoading] = useState(false)
   const [artData, setArtData] = useState<any[]>([])
-  const [count, setCount] = useState(1)
-
+  const [pageInfo, setPageInfo] = useState({ page: 1, pageSize: 5, count: 300 })
 
   useEffect(() => {
-    if (count > 0) {
-      setArtData([...artData, ...data.slice((count - 1) * 5, count * 5)])
+    (async () => {
+      const { data } = await getArtical(pageInfo)
+      setArtData([...artData, ...data.data])
       setLoading(false)
-    }
-  }, [count])
+    })()
+  },[])
 
-  const getMore = async () => {
+  useEffect(() => {
+    if (!loading) return
+
+    (async () => {
+      const { data } = await getArtical(pageInfo)
+
+      setArtData([...artData, ...data.data])
+      setLoading(false)
+    })()
+  }, [loading])
+
+  const getMoreMsg = () => {
+    setPageInfo({ ...pageInfo, page: pageInfo.page + 1 })
     setLoading(true)
-    await delayLoading(1000)
-    setCount(count + 1)
   }
 
   return (
@@ -38,7 +48,8 @@ const News: React.FC<ScreenProps<'News'>> = () => {
         style={{ backgroundColor: '#fff' }}
         renderItem={renderItem}
         keyExtractor={(item) => item.artical_title}
-        onEndReached={getMore}
+        onEndReached={getMoreMsg}
+        onEndReachedThreshold={0.9}
         ListFooterComponent={loading ? <BottomLoading title='正在前往元宇宙···' /> : <></>}
       />
     </SafeAreaView>

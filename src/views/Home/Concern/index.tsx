@@ -3,7 +3,9 @@ import { Text, View, StyleSheet, ScrollView } from 'react-native'
 import NullData from '@components/NullData'
 import IconFont from '@components/IconFont'
 import UserList from './UserList'
-import { userList } from './data'
+import { connect } from 'react-redux'
+import action from '@store/action'
+import { UserInfo } from '@store/reducer/user'
 
 
 const styles = StyleSheet.create({
@@ -20,7 +22,12 @@ const styles = StyleSheet.create({
   }
 })
 
-function Concern() {
+function Concern({ users, nowUser }: {
+  users: UserInfo[];
+  nowUser: {
+    username: string;
+  }
+}) {
   return (
     <View style={styles.contentView}>
       {/* 标题 */}
@@ -34,7 +41,7 @@ function Concern() {
         showsHorizontalScrollIndicator={false}
       >
         {
-          userList.map(item => <UserList key={item.user} {...item} />)
+          users.map(item => (item.username !== nowUser.username) && <UserList key={item.username} {...item} />)
         }
       </ScrollView>
       <NullData />
@@ -42,4 +49,11 @@ function Concern() {
   )
 }
 
-export default Concern
+const mapStateToProps = (state: any) => {
+  return {
+    users: state.user,
+    nowUser: state.nowUser
+  }
+};
+
+export default connect(mapStateToProps)(Concern)

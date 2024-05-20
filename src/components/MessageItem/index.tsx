@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import ActiveButton from '@components/ActiveButton'
 import IconFont from '@components/IconFont'
 import recommendData from '@datas/data0.json'
-import { calculateTimeDifference } from '@utils/index'
+import { calculateTimeDifference,parseJsonIfNecessary } from '@utils/index'
 
 const styles = StyleSheet.create({
   container: {
@@ -71,10 +71,11 @@ const MessageItem = ({ data, style }: {
   const [like, setLike] = useState(false)
 
   const goDetail = () => {
+
     navigation.navigate('Detail',{
       data:{
         ...data,
-        artical_content: JSON.parse(data.artical_content)
+        artical_content: parseJsonIfNecessary(data.artical_content)
       }
     })
   }
@@ -86,7 +87,7 @@ const MessageItem = ({ data, style }: {
           <Image
             style={styles.image}
             source={{
-              uri: imgs[data.user_id]
+              uri: imgs[data.user_id] || 'https://yuanlishe.cn/static/img/logonew1.png'
             }}
           />
           <View style={styles.authorMsg}>

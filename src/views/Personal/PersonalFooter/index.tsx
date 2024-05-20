@@ -1,7 +1,9 @@
 import React from 'react'
 import { View, StyleSheet, TouchableHighlight } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import {resetGenericPassword} from 'react-native-keychain'
 import ItemDomain from './ItemDomain'
+import { getToken } from '@utils/index'
 
 const data = [
   {
@@ -41,13 +43,14 @@ const PersonalFooter = () => {
   const navigation = useNavigation<NavigatePage>()
 
   // TODO: 有关各功能作用区域
-  const handleButton = (route: typeof data[number]['imgName']) => {
+  const handleButton = async (route: typeof data[number]['imgName']) => {
     if(route === 'Collect') {
       navigation.navigate(route)
+    } else if (route === 'Quit') {
+      await resetGenericPassword()
+      navigation.navigate('Login')
     }
   };
-
-
 
   return (
     <View style={[globalStyles.baseShadow, styles.mainView]}>

@@ -1,19 +1,29 @@
 import React from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { connect } from 'react-redux'
 import DynamicItem from '@components/DynamicItem'
 import { UserInfo } from '@views/Publish'
+import NullData from '@components/NullData'
 
 const AllDynamic = ({ publish }: {
   publish: UserInfo[]
 }) => {
 
   return (
-    <ScrollView>
+    <>
       {
-        publish.map((item, index) => <DynamicItem key={index} {...item} />)
+        publish.length ?
+          <ScrollView>
+            {
+              publish.map((item, index) => <DynamicItem key={index} {...item} />)
+            }
+          </ScrollView>
+          : <View style={{ flex: 1, justifyContent: 'center' }}>
+            <NullData />
+          </View>
       }
-    </ScrollView>
+    </>
+
   )
 }
 

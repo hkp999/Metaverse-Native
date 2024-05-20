@@ -1,19 +1,21 @@
+import { getToken } from '@utils/index';
 import axios, { AxiosInstance } from 'axios';
 
 const instance: AxiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:3001', // 使用环境变量获取API的基础URL
+  baseURL: 'http://192.168.137.1:3001', // 使用环境变量获取API的基础URL
   timeout: 5000,
 });
 
 instance.interceptors.request.use(
-  (config) => {
+   async (config) => {
     // 在这里添加任何需要修改的请求配置或者处理逻辑
     // const token = localStorage.getItem('file-upload-token')
-    // const urlArr = ['/login']
+    const token = await getToken()
+    const urlArr = ['/login']
 
-    // if (token && !urlArr.includes(config.url ?? '')) {
-    //   config.headers.Authorization = `${token}`;
-    // }
+    if (token && !urlArr.includes(config.url ?? '')) {
+      config.headers.Authorization = `${token}`;
+    }
     return config;
   },
   (error) => {

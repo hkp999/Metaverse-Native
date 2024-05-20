@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Image, Text } from 'react-native'
 import ActiveButton from '@components/ActiveButton'
-import { userList } from './data'
+import { UserInfo } from '@store/reducer/user'
 
 const styles = StyleSheet.create({
   contentView: {
@@ -43,29 +43,30 @@ const styles = StyleSheet.create({
   }
 })
 
-const UserList = ({ imgUrl, user, gender, fan, attent }:typeof userList[number]) => {
+const UserList = (props: UserInfo) => {
   return (
     <View style={[styles.contentView, globalStyles.baseShadow, {backgroundColor: '#f5f5f5'}]}>
       <View>
         <Image
           style={styles.img}
           source={{
-            uri: imgUrl
+            uri: props.avator
           }}
         />
         <View style={styles.iconView}>
           <Image
-            source={gender === 1 ? require('@assets/Home/man.png') : require('@assets/Home/woman.png')}
+            source={props.gender === '男' ? require('@assets/Home/man.png') : require('@assets/Home/woman.png')}
             style={styles.icon}
           />
         </View>
       </View>
-      <Text style={[globalStyles.baseFont, { marginTop: 5 }]}>{user}</Text>
-      <Text style={[globalStyles.smallSize, globalStyles.baseFont, { marginVertical: 15 }]}>{fan}粉丝·{attent}关注</Text>
+      <Text style={[globalStyles.baseFont, { marginTop: 5 }]}>{props.username}</Text>
+      <Text style={[globalStyles.smallSize, globalStyles.baseFont, { marginVertical: 15 }]}>{props.fan_count}粉丝·{props.follow_count}关注</Text>
       <ActiveButton
         style={styles.button}
         textStyle={styles.buttonText}
         activeStyle={{ backgroundColor: 'rgb(91, 150, 254)' }}
+        userList={props}
       />
     </View>
   )

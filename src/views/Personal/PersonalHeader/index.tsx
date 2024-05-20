@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, Text, Image, TouchableHighlight } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import Toast from 'react-native-toast-message'
 import IconFont from '@components/IconFont'
-import { connect } from 'react-redux'
-import { UserInfo } from '@store/reducer/user'
+import { userInfo } from '@request/index'
+import { calculateTimeDifference } from '@utils/index'
+import { Avatar } from '@rneui/base'
 
 const styles = StyleSheet.create({
   mainView: {
@@ -70,36 +72,62 @@ const styles = StyleSheet.create({
   }
 })
 
-const PersonalHeader = ({userInfo}: {
-  userInfo: UserInfo
-}) => {
+export type UserInfo = {
+  "age": string,
+  "description": string,
+  "email": string,
+  "id": number,
+  "username": string,
+  "avatar": string,
+  "createdAt": string,
+  "gender": number
+}
 
+const PersonalHeader = () => {
   const navigation = useNavigation<NavigatePage>()
+  const [user, setUser] = useState<UserInfo>()
+
   const data = [
     {
       key: 'dynamic_count',
       name: '动态',
-      count: userInfo.dynamic_count
+      count: 1
     },
     {
       key: 'fan_count',
       name: '粉丝',
-      count: userInfo.fan_count
+      count: 1
     },
     {
       key: 'follow_count',
       name: '关注',
-      count: userInfo.follow_count
+      count: 1
     },
     {
       key: 'points',
       name: '积分',
-      count: userInfo.points
+      count: 1
     },
   ]
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await userInfo()
+        if (data.code === 200) {
+          setUser(data.data)
+        }
+      } catch (error) {
+        Toast.show({
+          type: 'error',
+          text1: '发生了错误',
+        })
+      }
+    })()
+  }, [])
+
   const handleShowSheel = () => {
-    navigation.navigate('Infor')
+    navigation.navigate('Infor',user)
   }
 
   return (
@@ -108,23 +136,20 @@ const PersonalHeader = ({userInfo}: {
       <View style={styles.itemView}>
         {/* 头像 */}
         <View>
-          <Image
-            style={styles.img}
-            source={{
-              uri: userInfo.avator
-            }}
-          />
+        {
+          user?.avatar && <Avatar containerStyle={styles.img} rounded source={{ uri: user?.avatar }} />
+        }
         </View>
         {/* 信息部分 */}
         <View style={styles.contenView}>
           <View style={globalStyles.baseLayout}>
-            <Text style={styles.nickText} numberOfLines={1}>{userInfo.username}</Text>
-            <Text>元龄：{userInfo.mAge}</Text>
+            <Text style={styles.nickText} numberOfLines={1}>{user?.username}</Text>
+            <Text>元龄：{user?.createdAt && calculateTimeDifference(user?.createdAt).slice(0, -1)}</Text>
           </View>
           <View style={globalStyles.baseLayout}>
-            <Text style={styles.contentText} numberOfLines={1}>{userInfo.text}</Text>
-            <TouchableHighlight style={styles.iconView}  onPress={handleShowSheel} activeOpacity={0.2} underlayColor="#f5f5f5">
-                <Text style={styles.iconText}><IconFont name="Edit" size={10}></IconFont> 完善资料</Text>
+            <Text style={styles.contentText} numberOfLines={1}>{user?.description}</Text>
+            <TouchableHighlight style={styles.iconView} onPress={handleShowSheel} activeOpacity={0.2} underlayColor="#f5f5f5">
+              <Text style={styles.iconText}><IconFont name="Edit" size={10}></IconFont> 完善资料</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -146,10 +171,4 @@ const PersonalHeader = ({userInfo}: {
   )
 }
 
-const mapStateToProps = (state: any) => {
-  return {
-    userInfo: state.nowUser
-  }
-};
-
-export default connect(mapStateToProps)(PersonalHeader)
+export default PersonalHeader
